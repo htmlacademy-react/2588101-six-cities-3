@@ -2,6 +2,7 @@ import OfferMap from '../../components/offer-map/offer-map';
 import HeaderSignOut from '../../components/header-sign-out/header-sign-out';
 import PlaceCardBookmark from '../../components/place-card-bookmark/place-card-bookmark';
 import PlaceCardMark from '../../components/place-card-mark/place-card-mark';
+import {Link} from 'react-router-dom';
 
 function OfferPage(): JSX.Element {
   return (
@@ -210,9 +211,9 @@ function OfferPage(): JSX.Element {
             <div className="near-places__list places__list">
               <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <a href="#">
+                  <Link to="#">
                     <img className="place-card__image" src="img/room.jpg" width="260" height="200" alt="Place image"/>
-                  </a>
+                  </Link>
                 </div>
                 <div className="place-card__info">
                   <div className="place-card__price-wrapper">
@@ -234,7 +235,7 @@ function OfferPage(): JSX.Element {
                     </div>
                   </div>
                   <h2 className="place-card__name">
-                    <a href="#">Wood and stone place</a>
+                    <Link to="#">Wood and stone place</Link>
                   </h2>
                   <p className="place-card__type">Room</p>
                 </div>
