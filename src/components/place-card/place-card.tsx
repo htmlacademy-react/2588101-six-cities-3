@@ -1,3 +1,5 @@
+import PlaceCardBookmark from '../../components/place-card-bookmark/place-card-bookmark';
+
 function PlaceCard(): JSX.Element {
   return (
     <article className="cities__card place-card">
@@ -12,12 +14,7 @@ function PlaceCard(): JSX.Element {
             <b className="place-card__price-value">&euro;80</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">In bookmarks</span>
-          </button>
+          <PlaceCardBookmark />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
