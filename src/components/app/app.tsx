@@ -1,5 +1,7 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
+import {OfferMock} from '../../types/offer';
+import {ReviewMock} from '../../types/review';
 import PrivateRoute from '../private-route/private-route';
 import MainPage from '../../pages/main-page/main-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
@@ -9,9 +11,11 @@ import OfferPage from '../../pages/offer-page/offer-page';
 
 type AppPageProps = {
   placeCardCount: number;
+  offers: OfferMock;
+  reviews: ReviewMock;
 }
 
-function App({placeCardCount}: AppPageProps): JSX.Element {
+function App({placeCardCount, offers, reviews}: AppPageProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
