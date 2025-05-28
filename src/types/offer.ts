@@ -9,7 +9,7 @@ export type Location = {
   zoom: number;
 }
 
-export type OfferMock = {
+export type Offer= {
   id: string;
     title: string;
     type: string;
@@ -21,3 +21,5 @@ export type OfferMock = {
     isPremium: boolean;
     rating: number;
   };
+
+export type Offers = Offer[];

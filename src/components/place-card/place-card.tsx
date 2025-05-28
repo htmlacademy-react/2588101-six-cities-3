@@ -1,7 +1,13 @@
 import PlaceCardBookmark from '../../components/place-card-bookmark/place-card-bookmark';
 import {Link} from 'react-router-dom';
+import {Offer} from '../../types/offer';
 
-function PlaceCard(): JSX.Element {
+type PlaceCardProps = {
+  offer: Offer;
+};
+
+function PlaceCard({offer}: PlaceCardProps): JSX.Element {
+
   return (
     <article className="cities__card place-card">
       <div className="cities__image-wrapper place-card__image-wrapper">

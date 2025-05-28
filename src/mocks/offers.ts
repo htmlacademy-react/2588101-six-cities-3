@@ -1,6 +1,6 @@
-import {OfferMock} from '../types/offer';
+import {Offer} from '../types/offer';
 
-export const offers: OfferMock[] = [
+export const offers: Offer[] = [
   {
     'id': '439c940b-4539-4384-92ee-591ffd03f170',
     'title': 'Beautiful & luxurious apartment at great location',
@@ -94,4 +94,3 @@ export const offers: OfferMock[] = [
     'rating': 4.2
   },
 ];
-

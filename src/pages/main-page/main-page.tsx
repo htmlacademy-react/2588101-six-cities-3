@@ -3,12 +3,14 @@ import CitiesMap from '../../components/cities-map/cities-map';
 import HeaderSignOut from '../../components/header-sign-out/header-sign-out';
 import Cities from '../../components/cities/cities';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
+import {Offers} from '../types/offer';
 
 type MainPageProps = {
   placeCardCount: number;
+  offers: Offers[];
 }
 
-function MainPage({placeCardCount}: MainPageProps): JSX.Element {
+function MainPage({placeCardCount, offers}: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <HeaderSignOut />

@@ -4,10 +4,12 @@ avatarUrl: string;
 isPro: boolean;
 }
 
-export type ReviewMock = {
+export type Review = {
 id: string;
 date: string;
 user: User[];
 comment: string;
 rating: number;
 };
+
+export type Reviews = Review[];
