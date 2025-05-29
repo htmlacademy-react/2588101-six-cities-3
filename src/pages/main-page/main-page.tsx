@@ -1,4 +1,4 @@
-import PlaceCard from '../../components/place-card/place-card';
+import OffersList from '../../components/offer-list/offer-list';
 import CitiesMap from '../../components/cities-map/cities-map';
 import HeaderSignOut from '../../components/header-sign-out/header-sign-out';
 import Cities from '../../components/cities/cities';
@@ -36,11 +36,7 @@ function MainPage({placeCardCount, offers}: MainPageProps): JSX.Element {
               <b className="places__found">{placeCardCount} places to stay in Amsterdam</b>
               <PlacesSorting />
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
+                <OffersList offers={offers}/>
               </div>
             </section>
             <div className="cities__right-section">
