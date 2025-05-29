@@ -4,6 +4,7 @@ import HeaderSignOut from '../../components/header-sign-out/header-sign-out';
 import Cities from '../../components/cities/cities';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
 import {Offers} from '../types/offer';
+import {useState} from 'react';
 
 type MainPageProps = {
   placeCardCount: number;
@@ -11,6 +12,9 @@ type MainPageProps = {
 }
 
 function MainPage({placeCardCount, offers}: MainPageProps): JSX.Element {
+  const [activeId, setActiveId] = useState<string>();
+  const handleChangeActiveId = (id?: string) => setActiveId(id);
+
   return (
     <div className="page page--gray page--main">
       <HeaderSignOut />
@@ -36,7 +40,10 @@ function MainPage({placeCardCount, offers}: MainPageProps): JSX.Element {
               <b className="places__found">{placeCardCount} places to stay in Amsterdam</b>
               <PlacesSorting />
               <div className="cities__places-list places__list tabs__content">
-                <OffersList offers={offers}/>
+                <OffersList
+                  onHandleChangeActiveId={handleChangeActiveId}
+                  offers={offers}
+                />
               </div>
             </section>
             <div className="cities__right-section">

@@ -3,15 +3,23 @@ import {Offers} from '../../types/offer';
 
 type OfferListProps = {
 offers: Offers;
+onHandleChangeActiveId: (id?: string) => void;
 };
 
-function OfferList({offers}: OfferListProps): JSX.Element {
+function OfferList({
+  offers,
+  onHandleChangeActiveId,
+}: OfferListProps): JSX.Element {
   return (
     <>
       {offers.map((offer, id) => {
         const keyValue = `${id}-${offer.id}`;
         return (
-          <PlaceCard offer={offer} key={keyValue}/>
+          <PlaceCard
+            onHandleChangeActiveId={onHandleChangeActiveId}
+            offer={offer}
+            key={keyValue}
+          />
         );
       })}
     </>
