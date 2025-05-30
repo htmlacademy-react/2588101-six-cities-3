@@ -48,49 +48,49 @@ export const offers: Offer[] = [
     'rating': 2.9
   },
   {
-    'id': 'aca7a761-30e9-4445-bacd-a041e28513c0',
-    'title': 'Perfectly located Castro',
-    'type': 'house',
-    'price': 997,
-    'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/12.jpg',
+    'id': '4f99d1a0-ab18-43ca-8b56-d9b6d2566ac4',
+    'title': 'Penthouse, 4-5 rooms + 5 balconies',
+    'type': 'hotel',
+    'price': 291,
+    'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/8.jpg',
     'city': {
-      'name': 'Paris',
+      'name': 'Brussels',
       'location': {
-        'latitude': 48.85661,
-        'longitude': 2.351499,
+        'latitude': 50.846557,
+        'longitude': 4.351697,
         'zoom': 13
       }
     },
     'location': {
-      'latitude': 48.834610000000005,
-      'longitude': 2.335499,
+      'latitude': 50.867557,
+      'longitude': 4.371696999999999,
+      'zoom': 16
+    },
+    'isFavorite': true,
+    'isPremium': true,
+    'rating': 4.5
+  },
+  {
+    'id': 'c5d092e6-f748-4a30-8747-506dd7bdabb8',
+    'title': 'Beautiful & luxurious apartment at great location',
+    'type': 'apartment',
+    'price': 131,
+    'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/7.jpg',
+    'city': {
+      'name': 'Cologne',
+      'location': {
+        'latitude': 50.938361,
+        'longitude': 6.959974,
+        'zoom': 13
+      }
+    },
+    'location': {
+      'latitude': 50.932361,
+      'longitude': 6.937974,
       'zoom': 16
     },
     'isFavorite': false,
     'isPremium': false,
-    'rating': 4.4
-  },
-  {
-    'id': 'de3c3851-dfbd-4f51-b6e8-d6ed2673f535',
-    'title': 'House in countryside',
-    'type': 'hotel',
-    'price': 295,
-    'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/11.jpg',
-    'city': {
-      'name': 'Paris',
-      'location': {
-        'latitude': 48.85661,
-        'longitude': 2.351499,
-        'zoom': 13
-      }
-    },
-    'location': {
-      'latitude': 48.85761,
-      'longitude': 2.358499,
-      'zoom': 16
-    },
-    'isFavorite': false,
-    'isPremium': true,
-    'rating': 4.2
+    'rating': 5
   },
 ];
