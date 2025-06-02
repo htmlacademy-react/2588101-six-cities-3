@@ -41,7 +41,7 @@ function App({placeCardCount, offers, reviews}: AppPageProps): JSX.Element {
         />
         <Route
           path={AppRoute.Offer}
-          element={<OfferPage />}
+          element={<OfferPage reviews={reviews}/>}
         />
       </Routes>
     </BrowserRouter>
