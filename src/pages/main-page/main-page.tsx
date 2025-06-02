@@ -1,6 +1,6 @@
 import OffersList from '../../components/offer-list/offer-list';
 import CitiesMap from '../../components/cities-map/cities-map';
-import HeaderSignOut from '../../components/header-sign-out/header-sign-out';
+import Header from '../../components/header/header';
 import Cities from '../../components/cities/cities';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
 import {Offers} from '../types/offer';
@@ -17,7 +17,7 @@ function MainPage({placeCardCount, offers}: MainPageProps): JSX.Element {
 
   return (
     <div className="page page--gray page--main">
-      <HeaderSignOut />
+      <Header />
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>

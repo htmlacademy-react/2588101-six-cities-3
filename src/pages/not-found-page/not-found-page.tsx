@@ -1,4 +1,4 @@
-import HeaderSignOut from '../../components/header-sign-out/header-sign-out';
+import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import {AppRoute} from '../../const';
 import {Link} from 'react-router-dom';
@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 function NotFoundPage(): JSX.Element {
   return (
     <div className="page">
-      <HeaderSignOut />
+      <Header />
 
       <div className="error container">
         <h1 className="error__title">Error 404. Page Not Found.</h1>

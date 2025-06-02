@@ -1,5 +1,5 @@
 import OfferMap from '../../components/offer-map/offer-map';
-import HeaderSignOut from '../../components/header-sign-out/header-sign-out';
+import Header from '../../components/header/header';
 import PlaceCardBookmark from '../../components/place-card-bookmark/place-card-bookmark';
 import PlaceCardMark from '../../components/place-card-mark/place-card-mark';
 import Reviews from '../../components/reviews/reviews';
@@ -13,8 +13,7 @@ type ReviewProps = {
 function OfferPage({authorizationStatus}: ReviewProps): JSX.Element {
   return (
     <div className="page">
-      <HeaderSignOut />
-
+      <Header />
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">
@@ -136,7 +135,7 @@ function OfferPage({authorizationStatus}: ReviewProps): JSX.Element {
               </div>
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                <Reviews isAuth={authorizationStatus !== AuthorizationStatus.Auth} />
+                <Reviews isAuth={authorizationStatus === AuthorizationStatus.Auth} />
               </section>
             </div>
           </div>
@@ -180,9 +179,9 @@ function OfferPage({authorizationStatus}: ReviewProps): JSX.Element {
 
               <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <a href="#">
+                  <Link href="#">
                     <img className="place-card__image" src="img/apartment-02.jpg" width="260" height="200" alt="Place image"/>
-                  </a>
+                  </Link>
                 </div>
                 <div className="place-card__info">
                   <div className="place-card__price-wrapper">
@@ -199,7 +198,7 @@ function OfferPage({authorizationStatus}: ReviewProps): JSX.Element {
                     </div>
                   </div>
                   <h2 className="place-card__name">
-                    <a href="#">Canal View Prinsengracht</a>
+                    <Link href="#">Canal View Prinsengracht</Link>
                   </h2>
                   <p className="place-card__type">Apartment</p>
                 </div>
@@ -208,9 +207,9 @@ function OfferPage({authorizationStatus}: ReviewProps): JSX.Element {
               <article className="near-places__card place-card">
                 <PlaceCardMark />
                 <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <a href="#">
+                  <Link href="#">
                     <img className="place-card__image" src="img/apartment-03.jpg" width="260" height="200" alt="Place image"/>
-                  </a>
+                  </Link>
                 </div>
                 <div className="place-card__info">
                   <div className="place-card__price-wrapper">
@@ -227,7 +226,7 @@ function OfferPage({authorizationStatus}: ReviewProps): JSX.Element {
                     </div>
                   </div>
                   <h2 className="place-card__name">
-                    <a href="#">Nice, cozy, warm big bed apartment</a>
+                    <Link href="#">Nice, cozy, warm big bed apartment</Link>
                   </h2>
                   <p className="place-card__type">Apartment</p>
                 </div>

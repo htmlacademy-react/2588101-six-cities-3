@@ -1,4 +1,4 @@
-import HeaderSignOut from '../../components/header-sign-out/header-sign-out';
+import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import PlaceCardMark from '../../components/place-card-mark/place-card-mark';
 import {Link} from 'react-router-dom';
@@ -20,7 +20,7 @@ function FavoritesPage({offers}: FavoritesPageProps): JSX.Element {
 
   return (
     <div className="page">
-      <HeaderSignOut />
+      <Header />
 
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
