@@ -1,11 +1,8 @@
-import HeaderSignOut from '../../components/header-sign-out/header-sign-out';
 import Cities from '../../components/cities/cities';
 
 function MainEmpty(): JSX.Element {
   return (
     <div className="page page--gray page--main">
-      <HeaderSignOut />
-
       <main className="page__main page__main--index page__main--index-empty">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">

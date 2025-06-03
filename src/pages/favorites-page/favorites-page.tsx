@@ -7,9 +7,10 @@ import {AuthorizationStatus} from '../../const';
 
 type FavoritesPageProps = {
   offers: Offers;
+  authorizationStatus: AuthorizationStatus;
 };
 
-function FavoritesPage({offers}: FavoritesPageProps): JSX.Element {
+function FavoritesPage({offers, authorizationStatus}: FavoritesPageProps): JSX.Element {
   const filteredOffers = offers.filter((offer) => offer.isFavorite === true);
 
   const uniqCities: string[] = [];
@@ -21,7 +22,7 @@ function FavoritesPage({offers}: FavoritesPageProps): JSX.Element {
 
   return (
     <div className="page">
-      <Header isAuth={AuthorizationStatus.Auth} />
+      <Header isAuth={authorizationStatus === AuthorizationStatus.Auth} />
 
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">

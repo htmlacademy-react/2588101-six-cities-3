@@ -1,25 +1,28 @@
+/* eslint-disable no-console */
 import OffersList from '../../components/offer-list/offer-list';
 import CitiesMap from '../../components/cities-map/cities-map';
 import Header from '../../components/header/header';
 import Cities from '../../components/cities/cities';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
-import {Offers} from '../types/offer';
+import {Offers} from '../../types/offer';
 import {useState} from 'react';
 import {AuthorizationStatus} from '../../const';
 
 type MainPageProps = {
   placeCardCount: number;
   offers: Offers[];
+  authorizationStatus: AuthorizationStatus;
 }
 
-function MainPage({placeCardCount, offers}: MainPageProps): JSX.Element {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+function MainPage({placeCardCount, offers, authorizationStatus}: MainPageProps): JSX.Element {
   const [activeId, setActiveId] = useState<string>();
   const handleChangeActiveId = (id?: string) => setActiveId(id);
 
+  console.log(activeId);
+
   return (
     <div className="page page--gray page--main">
-      <Header isAuth={AuthorizationStatus.Auth} />
+      <Header isAuth={authorizationStatus === AuthorizationStatus.Auth} />
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>

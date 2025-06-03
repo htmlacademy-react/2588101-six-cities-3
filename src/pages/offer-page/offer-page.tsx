@@ -179,7 +179,7 @@ function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
 
               <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <Link href="#">
+                  <Link to="#">
                     <img className="place-card__image" src="img/apartment-02.jpg" width="260" height="200" alt="Place image"/>
                   </Link>
                 </div>
@@ -198,7 +198,7 @@ function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
                     </div>
                   </div>
                   <h2 className="place-card__name">
-                    <Link href="#">Canal View Prinsengracht</Link>
+                    <Link to="#">Canal View Prinsengracht</Link>
                   </h2>
                   <p className="place-card__type">Apartment</p>
                 </div>
@@ -207,7 +207,7 @@ function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
               <article className="near-places__card place-card">
                 <PlaceCardMark />
                 <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <Link href="#">
+                  <Link to="#">
                     <img className="place-card__image" src="img/apartment-03.jpg" width="260" height="200" alt="Place image"/>
                   </Link>
                 </div>
@@ -226,7 +226,7 @@ function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
                     </div>
                   </div>
                   <h2 className="place-card__name">
-                    <Link href="#">Nice, cozy, warm big bed apartment</Link>
+                    <Link to="#">Nice, cozy, warm big bed apartment</Link>
                   </h2>
                   <p className="place-card__type">Apartment</p>
                 </div>

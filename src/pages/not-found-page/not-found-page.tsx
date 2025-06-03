@@ -3,11 +3,14 @@ import Footer from '../../components/footer/footer';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {Link} from 'react-router-dom';
 
+type NotFoundPageProps = {
+  authorizationStatus: AuthorizationStatus;
+};
 
-function NotFoundPage(): JSX.Element {
+function NotFoundPage({authorizationStatus}: NotFoundPageProps): JSX.Element {
   return (
     <div className="page">
-      <Header isAuth={AuthorizationStatus.Auth} />
+      <Header isAuth={authorizationStatus === AuthorizationStatus.Auth} />
 
       <div className="error container">
         <h1 className="error__title">Error 404. Page Not Found.</h1>
