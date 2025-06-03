@@ -37,6 +37,7 @@ function App({placeCardCount, offers, reviews}: AppPageProps): JSX.Element {
             >
               <FavoritesPage
                 offers={offers}
+                authorizationStatus={AuthorizationStatus.Auth}
               />
             </PrivateRoute>
           }
@@ -47,7 +48,11 @@ function App({placeCardCount, offers, reviews}: AppPageProps): JSX.Element {
         />
         <Route
           path="*"
-          element={<NotFoundPage />}
+          element={
+            <NotFoundPage
+              authorizationStatus={AuthorizationStatus.Auth}
+            />
+          }
         />
         <Route
           path={AppRoute.Offer}
