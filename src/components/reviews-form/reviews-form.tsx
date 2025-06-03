@@ -1,11 +1,6 @@
-import {useState, Fragment} from 'react';
-import {Reviews} from '../../types/review';
+import {useState, Fragment, FormEvent, ReactEventHandler} from 'react';
 
 type TChangeHandler = ReactEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-
-type ReviewsFormProps = {
-  reviews: Reviews;
-};
 
 const rating = [
   {value: 5, label: 'perfect'},
@@ -15,16 +10,16 @@ const rating = [
   {value: 1, label: 'terribly'},
 ];
 
-function ReviewsForm({reviews}: ReviewsFormProps): JSX.Element {
+function ReviewsForm(): JSX.Element {
 
   const [userReview, setUserReview] = useState({
     rating: 0,
-    review: '',
+    review: ''
   });
 
   const handleChange: TChangeHandler = (evt) => {
     const {name, value} = evt.target;
-    setUserReview({...userReview, [name]: value});
+    setUserReview({...userReview, [name]: value as string});
   };
 
   return (
@@ -59,7 +54,7 @@ function ReviewsForm({reviews}: ReviewsFormProps): JSX.Element {
         <p className="reviews__help">
                       To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={reviews?.length < 50 || reviews?.rating === 0}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
       </div>
     </form>
   );

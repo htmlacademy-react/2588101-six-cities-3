@@ -2,7 +2,6 @@
 import PlaceCardMark from '../../components/place-card-mark/place-card-mark';
 import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer';
-import {AppRoute} from '../../const';
 
 type PlaceCardProps = {
   offer: Offer;

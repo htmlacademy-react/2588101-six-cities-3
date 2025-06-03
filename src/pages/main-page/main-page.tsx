@@ -5,6 +5,7 @@ import Cities from '../../components/cities/cities';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
 import {Offers} from '../types/offer';
 import {useState} from 'react';
+import {AuthorizationStatus} from '../../const';
 
 type MainPageProps = {
   placeCardCount: number;
@@ -12,12 +13,13 @@ type MainPageProps = {
 }
 
 function MainPage({placeCardCount, offers}: MainPageProps): JSX.Element {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeId, setActiveId] = useState<string>();
   const handleChangeActiveId = (id?: string) => setActiveId(id);
 
   return (
     <div className="page page--gray page--main">
-      <Header />
+      <Header isAuth={AuthorizationStatus.Auth} />
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>

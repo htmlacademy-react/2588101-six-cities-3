@@ -3,6 +3,7 @@ import Footer from '../../components/footer/footer';
 import PlaceCardMark from '../../components/place-card-mark/place-card-mark';
 import {Link} from 'react-router-dom';
 import {Offers, Offer} from '../../types/offer';
+import {AuthorizationStatus} from '../../const';
 
 type FavoritesPageProps = {
   offers: Offers;
@@ -14,13 +15,13 @@ function FavoritesPage({offers}: FavoritesPageProps): JSX.Element {
   const uniqCities: string[] = [];
   filteredOffers.forEach((element: Offer) => {
     if (element.city.name !== uniqCities[uniqCities.length - 1]) {
-      uniqCities.push(element.city.name);
+      uniqCities.push(element.city.name as string);
     }
   });
 
   return (
     <div className="page">
-      <Header />
+      <Header isAuth={AuthorizationStatus.Auth} />
 
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">

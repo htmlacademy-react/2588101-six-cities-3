@@ -30,11 +30,11 @@ function Header({isAuth}: HeaderProps): JSX.Element {
               </li>
               <li className="header__nav-item">
                 {isAuth ?
-                  <Link className="header__nav-link" to={AppRoute.Login}>
-                    <span className="header__login">Sign in</span>
-                  </Link> :
                   <Link className="header__nav-link" to="#">
                     <span className="header__signout">Sign out</span>
+                  </Link> :
+                  <Link className="header__nav-link" to={AppRoute.Login}>
+                    <span className="header__login">Sign in</span>
                   </Link>}
               </li>
             </ul>

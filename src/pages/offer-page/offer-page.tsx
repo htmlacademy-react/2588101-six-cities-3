@@ -6,14 +6,14 @@ import Reviews from '../../components/reviews/reviews';
 import {Link} from 'react-router-dom';
 import {AuthorizationStatus} from '../../const';
 
-type ReviewProps = {
+type OfferPageProps = {
   authorizationStatus: AuthorizationStatus;
 };
 
-function OfferPage({authorizationStatus}: ReviewProps): JSX.Element {
+function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
   return (
     <div className="page">
-      <Header />
+      <Header isAuth={authorizationStatus === AuthorizationStatus.Auth} />
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">
