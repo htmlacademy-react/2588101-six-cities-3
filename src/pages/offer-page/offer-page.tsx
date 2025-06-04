@@ -1,16 +1,20 @@
+/* eslint-disable no-console */
 import OfferMap from '../../components/offer-map/offer-map';
 import Header from '../../components/header/header';
 import PlaceCardBookmark from '../../components/place-card-bookmark/place-card-bookmark';
 import PlaceCardMark from '../../components/place-card-mark/place-card-mark';
 import Reviews from '../../components/reviews/reviews';
+import {Reviews as ReviewsI} from '../../types/review';
 import {Link} from 'react-router-dom';
 import {AuthorizationStatus} from '../../const';
 
 type OfferPageProps = {
   authorizationStatus: AuthorizationStatus;
+  reviews: ReviewsI;
 };
 
-function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
+function OfferPage({authorizationStatus, reviews}: OfferPageProps): JSX.Element {
+  console.log(reviews);
   return (
     <div className="page">
       <Header isAuth={authorizationStatus === AuthorizationStatus.Auth} />
@@ -157,12 +161,7 @@ function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
                       <b className="place-card__price-value">&euro;80</b>
                       <span className="place-card__price-text">&#47;&nbsp;night</span>
                     </div>
-                    <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
-                      <svg className="place-card__bookmark-icon" width="18" height="19">
-                        <use xlinkHref="#icon-bookmark"></use>
-                      </svg>
-                      <span className="visually-hidden">In bookmarks</span>
-                    </button>
+                    <PlaceCardBookmark isFavorite />
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
@@ -189,7 +188,7 @@ function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
                       <b className="place-card__price-value">&euro;132</b>
                       <span className="place-card__price-text">&#47;&nbsp;night</span>
                     </div>
-                    <PlaceCardBookmark />
+                    <PlaceCardBookmark isFavorite={false} />
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
@@ -217,7 +216,7 @@ function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
                       <b className="place-card__price-value">&euro;180</b>
                       <span className="place-card__price-text">&#47;&nbsp;night</span>
                     </div>
-                    <PlaceCardBookmark />
+                    <PlaceCardBookmark isFavorite />
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">

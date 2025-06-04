@@ -10,7 +10,7 @@ import {AuthorizationStatus} from '../../const';
 
 type MainPageProps = {
   placeCardCount: number;
-  offers: Offers[];
+  offers: Offers;
   authorizationStatus: AuthorizationStatus;
 }
 

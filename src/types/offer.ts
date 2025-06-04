@@ -1,6 +1,6 @@
 export type City = {
   name: string;
-  location: Location[];
+  location: Location;
 }
 
 export type Location = {
@@ -15,8 +15,8 @@ export type Offer= {
     type: string;
     price: number;
     previewImage: string;
-    city: City[];
-    location: Location[];
+    city: City;
+    location: Location;
     isFavorite: boolean;
     isPremium: boolean;
     rating: number;

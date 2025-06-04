@@ -16,7 +16,7 @@ function FavoritesPage({offers, authorizationStatus}: FavoritesPageProps): JSX.E
   const uniqCities: string[] = [];
   filteredOffers.forEach((element: Offer) => {
     if (element.city.name !== uniqCities[uniqCities.length - 1]) {
-      uniqCities.push(element.city.name as string);
+      uniqCities.push(element.city.name);
     }
   });
 

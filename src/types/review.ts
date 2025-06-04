@@ -7,7 +7,7 @@ isPro: boolean;
 export type Review = {
 id: string;
 date: string;
-user: User[];
+user: User;
 comment: string;
 rating: number;
 };

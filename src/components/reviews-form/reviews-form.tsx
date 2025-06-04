@@ -1,6 +1,4 @@
-import {useState, Fragment, FormEvent, ReactEventHandler} from 'react';
-
-type TChangeHandler = ReactEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+import {useState, Fragment, FormEvent} from 'react';
 
 const rating = [
   {value: 5, label: 'perfect'},
@@ -17,9 +15,9 @@ function ReviewsForm(): JSX.Element {
     review: ''
   });
 
-  const handleChange: TChangeHandler = (evt) => {
+  const handleChange = (evt: {target: {name: string; value: string}}) => {
     const {name, value} = evt.target;
-    setUserReview({...userReview, [name]: value as string});
+    setUserReview({...userReview, [name]: value});
   };
 
   return (
