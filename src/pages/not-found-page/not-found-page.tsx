@@ -1,12 +1,16 @@
-import HeaderSignOut from '../../components/header-sign-out/header-sign-out';
+import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
-import {AppRoute} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
 import {Link} from 'react-router-dom';
 
-function NotFoundPage(): JSX.Element {
+type NotFoundPageProps = {
+  authorizationStatus: AuthorizationStatus;
+};
+
+function NotFoundPage({authorizationStatus}: NotFoundPageProps): JSX.Element {
   return (
     <div className="page">
-      <HeaderSignOut />
+      <Header isAuth={authorizationStatus === AuthorizationStatus.Auth} />
 
       <div className="error container">
         <h1 className="error__title">Error 404. Page Not Found.</h1>

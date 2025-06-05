@@ -1,17 +1,28 @@
-import PlaceCard from '../../components/place-card/place-card';
+/* eslint-disable no-console */
+import OffersList from '../../components/offer-list/offer-list';
 import CitiesMap from '../../components/cities-map/cities-map';
-import HeaderSignOut from '../../components/header-sign-out/header-sign-out';
+import Header from '../../components/header/header';
 import Cities from '../../components/cities/cities';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
+import {Offers} from '../../types/offer';
+import {useState} from 'react';
+import {AuthorizationStatus} from '../../const';
 
 type MainPageProps = {
   placeCardCount: number;
+  offers: Offers;
+  authorizationStatus: AuthorizationStatus;
 }
 
-function MainPage({placeCardCount}: MainPageProps): JSX.Element {
+function MainPage({placeCardCount, offers, authorizationStatus}: MainPageProps): JSX.Element {
+  const [activeId, setActiveId] = useState<string>();
+  const handleChangeActiveId = (id?: string) => setActiveId(id);
+
+  console.log(activeId);
+
   return (
     <div className="page page--gray page--main">
-      <HeaderSignOut />
+      <Header isAuth={authorizationStatus === AuthorizationStatus.Auth} />
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
@@ -34,11 +45,10 @@ function MainPage({placeCardCount}: MainPageProps): JSX.Element {
               <b className="places__found">{placeCardCount} places to stay in Amsterdam</b>
               <PlacesSorting />
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
+                <OffersList
+                  onHandleChangeActiveId={handleChangeActiveId}
+                  offers={offers}
+                />
               </div>
             </section>
             <div className="cities__right-section">

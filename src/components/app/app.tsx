@@ -1,5 +1,7 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
+import {Offers} from '../../types/offer';
+import {Reviews} from '../../types/review';
 import PrivateRoute from '../private-route/private-route';
 import MainPage from '../../pages/main-page/main-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
@@ -9,21 +11,34 @@ import OfferPage from '../../pages/offer-page/offer-page';
 
 type AppPageProps = {
   placeCardCount: number;
+  offers: Offers;
+  reviews: Reviews;
 }
 
-function App({placeCardCount}: AppPageProps): JSX.Element {
+function App({placeCardCount, offers, reviews}: AppPageProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainPage placeCardCount={placeCardCount} />}
+          element={
+            <MainPage
+              placeCardCount={placeCardCount}
+              offers={offers}
+              authorizationStatus={AuthorizationStatus.Auth}
+            />
+          }
         />
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <FavoritesPage />
+            <PrivateRoute
+              authorizationStatus={AuthorizationStatus.Auth}
+            >
+              <FavoritesPage
+                offers={offers}
+                authorizationStatus={AuthorizationStatus.Auth}
+              />
             </PrivateRoute>
           }
         />
@@ -33,11 +48,20 @@ function App({placeCardCount}: AppPageProps): JSX.Element {
         />
         <Route
           path="*"
-          element={<NotFoundPage />}
+          element={
+            <NotFoundPage
+              authorizationStatus={AuthorizationStatus.Auth}
+            />
+          }
         />
         <Route
           path={AppRoute.Offer}
-          element={<OfferPage />}
+          element={
+            <OfferPage
+              reviews={reviews}
+              authorizationStatus={AuthorizationStatus.Auth}
+            />
+          }
         />
       </Routes>
     </BrowserRouter>

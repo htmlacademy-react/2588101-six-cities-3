@@ -1,11 +1,6 @@
-import HeaderSignOut from '../../components/header-sign-out/header-sign-out';
-import Footer from '../../components/footer/footer';
-
 function FavoritesEmpty(): JSX.Element {
   return (
     <div className="page page--favorites-empty">
-      <HeaderSignOut />
-
       <main className="page__main page__main--favorites page__main--favorites-empty">
         <div className="page__favorites-container container">
           <section className="favorites favorites--empty">
@@ -17,9 +12,6 @@ function FavoritesEmpty(): JSX.Element {
           </section>
         </div>
       </main>
-      <footer className="footer">
-        <Footer />
-      </footer>
     </div>
   );
 }
