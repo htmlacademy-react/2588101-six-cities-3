@@ -9,6 +9,7 @@ import LoginPage from '../../pages/login-page/login-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 
+
 type AppPageProps = {
   placeCardCount: number;
   offers: Offers;
