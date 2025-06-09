@@ -3,18 +3,17 @@ import OfferMap from '../../components/offer-map/offer-map';
 import Header from '../../components/header/header';
 import PlaceCardBookmark from '../../components/place-card-bookmark/place-card-bookmark';
 import PlaceCardMark from '../../components/place-card-mark/place-card-mark';
-import Reviews from '../../components/reviews/reviews';
-import {Reviews as ReviewsI} from '../../types/review';
+import ReviewsList from '../../components/reviews-list/reviews-list';
+import {mockReviews} from '../../mocks/reviews';
 import {Link} from 'react-router-dom';
 import {AuthorizationStatus} from '../../const';
 
 type OfferPageProps = {
   authorizationStatus: AuthorizationStatus;
-  reviews: ReviewsI;
 };
 
-function OfferPage({authorizationStatus, reviews}: OfferPageProps): JSX.Element {
-  console.log(reviews);
+function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
+
   return (
     <div className="page">
       <Header isAuth={authorizationStatus === AuthorizationStatus.Auth} />
@@ -138,8 +137,14 @@ function OfferPage({authorizationStatus, reviews}: OfferPageProps): JSX.Element 
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                <Reviews isAuth={authorizationStatus === AuthorizationStatus.Auth} />
+                {mockReviews.length > 0 &&
+                <>
+                  <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{mockReviews.length}</span></h2>
+                  <ReviewsList
+                    isAuth={authorizationStatus === AuthorizationStatus.Auth}
+                    reviews={mockReviews}
+                  />
+                </>}
               </section>
             </div>
           </div>
