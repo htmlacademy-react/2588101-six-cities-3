@@ -61,6 +61,7 @@ function App({placeCardCount, offers, reviews}: AppPageProps): JSX.Element {
             <OfferPage
               reviews={reviews}
               authorizationStatus={AuthorizationStatus.Auth}
+              offers={offers}
             />
           }
         />

@@ -1,18 +1,25 @@
 /* eslint-disable no-console */
-import OfferMap from '../../components/offer-map/offer-map';
+import NotFoundPage from '../not-found-page/not-found-page';
 import Header from '../../components/header/header';
 import PlaceCardBookmark from '../../components/place-card-bookmark/place-card-bookmark';
 import PlaceCardMark from '../../components/place-card-mark/place-card-mark';
 import ReviewsList from '../../components/reviews-list/reviews-list';
+import CitiesMap from '../../components/cities-map/cities-map';
+import {Offers} from '../../types/offer';
+import {CITY} from '../../mocks/city';
 import {mockReviews} from '../../mocks/reviews';
-import {Link} from 'react-router-dom';
+import {Link, Navigate} from 'react-router-dom';
 import {AuthorizationStatus} from '../../const';
 
 type OfferPageProps = {
   authorizationStatus: AuthorizationStatus;
+  offers: Offers;
 };
 
-function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
+function OfferPage({authorizationStatus, offers}: OfferPageProps): JSX.Element {
+  if (!offers) {
+    return <Navigate to={<NotFoundPage />} />;
+  }
 
   return (
     <div className="page">
@@ -52,14 +59,14 @@ function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
                 </h1>
                 <button className="offer__bookmark-button button" type="button">
                   <svg className="offer__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
+                    <use xlinkHref="#icon-bookmark"/>
                   </svg>
                   <span className="visually-hidden">To bookmarks</span>
                 </button>
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{width: '80%'}}></span>
+                  <span style={{width: '80%'}}/>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="offer__rating-value rating__value">4.8</span>
@@ -148,7 +155,15 @@ function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
               </section>
             </div>
           </div>
-          <OfferMap />
+          <section
+            style={{width: '100%'}}
+            className={`${offers.length === 0 ? 'offer__map' : ''} map`}
+          >
+            <CitiesMap
+              city={CITY}
+              offers={offers}
+            />
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
@@ -170,7 +185,7 @@ function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={{width: '80%'}}></span>
+                      <span style={{width: '80%'}}/>
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>
@@ -197,7 +212,7 @@ function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={{width: '80%'}}></span>
+                      <span style={{width: '80%'}}/>
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>
@@ -225,7 +240,7 @@ function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
                   </div>
                   <div className="place-card__rating rating">
                     <div className="place-card__stars rating__stars">
-                      <span style={{width: '100%'}}></span>
+                      <span style={{width: '100%'}}/>
                       <span className="visually-hidden">Rating</span>
                     </div>
                   </div>
