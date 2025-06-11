@@ -1,20 +1,26 @@
-/* eslint-disable no-console */
-import OfferMap from '../../components/offer-map/offer-map';
 import Header from '../../components/header/header';
-import PlaceCardBookmark from '../../components/place-card-bookmark/place-card-bookmark';
-import PlaceCardMark from '../../components/place-card-mark/place-card-mark';
-import Reviews from '../../components/reviews/reviews';
-import {Reviews as ReviewsI} from '../../types/review';
-import {Link} from 'react-router-dom';
+import NearPlacesList from '../../components/near-places-list/near-places-list';
+import ReviewsList from '../../components/reviews-list/reviews-list';
+import CitiesMap from '../../components/cities-map/cities-map';
+import {Offers} from '../../types/offer';
+import {CITY} from '../../mocks/city';
+import {mockReviews} from '../../mocks/reviews';
+import {Navigate, useParams} from 'react-router-dom';
 import {AuthorizationStatus} from '../../const';
 
 type OfferPageProps = {
   authorizationStatus: AuthorizationStatus;
-  reviews: ReviewsI;
+  offers: Offers;
 };
 
-function OfferPage({authorizationStatus, reviews}: OfferPageProps): JSX.Element {
-  console.log(reviews);
+function OfferPage({authorizationStatus, offers}: OfferPageProps): JSX.Element {
+  const params = useParams();
+  const offer = offers.find((innerOffer) => innerOffer.id === params.id);
+
+  if (!offer) {
+    return <Navigate to={'*'} />;
+  }
+
   return (
     <div className="page">
       <Header isAuth={authorizationStatus === AuthorizationStatus.Auth} />
@@ -44,26 +50,27 @@ function OfferPage({authorizationStatus, reviews}: OfferPageProps): JSX.Element 
           </div>
           <div className="offer__container container">
             <div className="offer__wrapper">
+              {offer.isPremium &&
               <div className="offer__mark">
                 <span>Premium</span>
-              </div>
+              </div>}
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
-                  Beautiful &amp; luxurious studio at great location
+                  {offer.title}
                 </h1>
                 <button className="offer__bookmark-button button" type="button">
                   <svg className="offer__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
+                    <use xlinkHref="#icon-bookmark"/>
                   </svg>
                   <span className="visually-hidden">To bookmarks</span>
                 </button>
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{width: '80%'}}></span>
+                  <span style={{width: `${Math.round(offer.rating) * 20}%`}}/>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="offer__rating-value rating__value">4.8</span>
+                <span className="offer__rating-value rating__value">{offer.rating}</span>
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
@@ -77,7 +84,7 @@ function OfferPage({authorizationStatus, reviews}: OfferPageProps): JSX.Element 
                 </li>
               </ul>
               <div className="offer__price">
-                <b className="offer__price-value">&euro;120</b>
+                <b className="offer__price-value">&euro;{offer.price}</b>
                 <span className="offer__price-text">&nbsp;night</span>
               </div>
               <div className="offer__inside">
@@ -138,101 +145,37 @@ function OfferPage({authorizationStatus, reviews}: OfferPageProps): JSX.Element 
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                <Reviews isAuth={authorizationStatus === AuthorizationStatus.Auth} />
+                {mockReviews.length > 0 &&
+                <>
+                  <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{mockReviews.length}</span></h2>
+                  <ReviewsList
+                    isAuth={authorizationStatus === AuthorizationStatus.Auth}
+                    reviews={mockReviews}
+                  />
+                </>}
               </section>
             </div>
           </div>
-          <OfferMap />
-        </section>
-        <div className="container">
-          <section className="near-places places">
-            <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <div className="near-places__list places__list">
-              <article className="near-places__card place-card">
-                <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <Link to="#">
-                    <img className="place-card__image" src="img/room.jpg" width="260" height="200" alt="Place image"/>
-                  </Link>
-                </div>
-                <div className="place-card__info">
-                  <div className="place-card__price-wrapper">
-                    <div className="place-card__price">
-                      <b className="place-card__price-value">&euro;80</b>
-                      <span className="place-card__price-text">&#47;&nbsp;night</span>
-                    </div>
-                    <PlaceCardBookmark isFavorite />
-                  </div>
-                  <div className="place-card__rating rating">
-                    <div className="place-card__stars rating__stars">
-                      <span style={{width: '80%'}}></span>
-                      <span className="visually-hidden">Rating</span>
-                    </div>
-                  </div>
-                  <h2 className="place-card__name">
-                    <Link to="#">Wood and stone place</Link>
-                  </h2>
-                  <p className="place-card__type">Room</p>
-                </div>
-              </article>
-
-              <article className="near-places__card place-card">
-                <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <Link to="#">
-                    <img className="place-card__image" src="img/apartment-02.jpg" width="260" height="200" alt="Place image"/>
-                  </Link>
-                </div>
-                <div className="place-card__info">
-                  <div className="place-card__price-wrapper">
-                    <div className="place-card__price">
-                      <b className="place-card__price-value">&euro;132</b>
-                      <span className="place-card__price-text">&#47;&nbsp;night</span>
-                    </div>
-                    <PlaceCardBookmark isFavorite={false} />
-                  </div>
-                  <div className="place-card__rating rating">
-                    <div className="place-card__stars rating__stars">
-                      <span style={{width: '80%'}}></span>
-                      <span className="visually-hidden">Rating</span>
-                    </div>
-                  </div>
-                  <h2 className="place-card__name">
-                    <Link to="#">Canal View Prinsengracht</Link>
-                  </h2>
-                  <p className="place-card__type">Apartment</p>
-                </div>
-              </article>
-
-              <article className="near-places__card place-card">
-                <PlaceCardMark />
-                <div className="near-places__image-wrapper place-card__image-wrapper">
-                  <Link to="#">
-                    <img className="place-card__image" src="img/apartment-03.jpg" width="260" height="200" alt="Place image"/>
-                  </Link>
-                </div>
-                <div className="place-card__info">
-                  <div className="place-card__price-wrapper">
-                    <div className="place-card__price">
-                      <b className="place-card__price-value">&euro;180</b>
-                      <span className="place-card__price-text">&#47;&nbsp;night</span>
-                    </div>
-                    <PlaceCardBookmark isFavorite />
-                  </div>
-                  <div className="place-card__rating rating">
-                    <div className="place-card__stars rating__stars">
-                      <span style={{width: '100%'}}></span>
-                      <span className="visually-hidden">Rating</span>
-                    </div>
-                  </div>
-                  <h2 className="place-card__name">
-                    <Link to="#">Nice, cozy, warm big bed apartment</Link>
-                  </h2>
-                  <p className="place-card__type">Apartment</p>
-                </div>
-              </article>
-            </div>
+          <section
+            style={{width: '100%'}}
+            className={`${offers.length === 0 ? 'offer__map' : ''} map`}
+          >
+            <CitiesMap
+              city={CITY}
+              offers={offers}
+              activeId={offer.id}
+            />
           </section>
-        </div>
+        </section>
+        {offers && offers.length > 0 &&
+          <div className="container">
+            <section className="near-places places">
+              <h2 className="near-places__title">Other places in the neighbourhood</h2>
+              <div className="near-places__list places__list">
+                <NearPlacesList offers={offers} />
+              </div>
+            </section>
+          </div>}
       </main>
     </div>
   );
