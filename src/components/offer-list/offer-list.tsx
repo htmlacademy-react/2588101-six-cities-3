@@ -19,6 +19,7 @@ function OfferList({
             onHandleChangeActiveId={onHandleChangeActiveId}
             offer={offer}
             key={keyValue}
+            isNearPlace={false}
           />
         );
       })}

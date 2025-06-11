@@ -19,8 +19,6 @@ function MainPage({placeCardCount, offers, authorizationStatus}: MainPageProps):
   const [activeId, setActiveId] = useState<string>();
   const handleChangeActiveId = (id?: string) => setActiveId(id);
 
-  console.log(activeId);
-
   return (
     <div className="page page--gray page--main">
       <Header isAuth={authorizationStatus === AuthorizationStatus.Auth} />
