@@ -1,23 +1,22 @@
-/* eslint-disable no-console */
 import OffersList from '../../components/offer-list/offer-list';
 import CitiesMap from '../../components/cities-map/cities-map';
 import Header from '../../components/header/header';
 import Cities from '../../components/cities/cities';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
 import {CITY} from '../../mocks/city';
-import {Offers} from '../../types/offer';
 import {useState} from 'react';
 import {AuthorizationStatus} from '../../const';
+import {useAppSelector} from '../../hooks';
 
 type MainPageProps = {
-  placeCardCount: number;
-  offers: Offers;
   authorizationStatus: AuthorizationStatus;
 }
 
-function MainPage({placeCardCount, offers, authorizationStatus}: MainPageProps): JSX.Element {
+function MainPage({authorizationStatus}: MainPageProps): JSX.Element {
   const [activeId, setActiveId] = useState<string>();
   const handleChangeActiveId = (id?: string) => setActiveId(id);
+
+  const offers = useAppSelector((state) => state.offers);
 
   return (
     <div className="page page--gray page--main">
@@ -41,7 +40,7 @@ function MainPage({placeCardCount, offers, authorizationStatus}: MainPageProps):
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{placeCardCount} places to stay in {CITY.name}</b>
+              <b className="places__found">{offers.length} places to stay in {CITY.name}</b>
               <PlacesSorting />
               <div className="cities__places-list places__list tabs__content">
                 <OffersList
