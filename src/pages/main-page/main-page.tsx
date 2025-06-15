@@ -19,7 +19,7 @@ function MainPage({authorizationStatus}: MainPageProps): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const activeCity = useAppSelector((state) => state.activeCity);
 
-  const activeCityOffers = offers.filter((offer) => offer.city.name === activeCity.name);
+  const activeCityOffers = offers.filter((offer) => offer.city.name === activeCity);
 
   return (
     <div className="page page--gray page--main">
@@ -36,7 +36,7 @@ function MainPage({authorizationStatus}: MainPageProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{activeCityOffers.length} places to stay in {activeCity.name}</b>
+              <b className="places__found">{activeCityOffers.length} place{activeCityOffers.length > 1 && 's'} to stay in {activeCity}</b>
               <PlacesSorting />
               <div className="cities__places-list places__list tabs__content">
                 <OffersList
