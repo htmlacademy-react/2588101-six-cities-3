@@ -1,6 +1,9 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {useEffect} from 'react';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import {Offers} from '../../types/offer';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {initOffers} from '../../store/action';
+import {offers as mockOffers} from '../../mocks/offers';
 import PrivateRoute from '../private-route/private-route';
 import MainPage from '../../pages/main-page/main-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
@@ -8,13 +11,15 @@ import LoginPage from '../../pages/login-page/login-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 
+function App(): JSX.Element {
+  const dispatch = useAppDispatch();
 
-type AppPageProps = {
-  placeCardCount: number;
-  offers: Offers;
-}
+  useEffect(() => {
+    dispatch(initOffers({offers: mockOffers}));
+  },[dispatch]);
 
-function App({placeCardCount, offers}: AppPageProps): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -22,8 +27,6 @@ function App({placeCardCount, offers}: AppPageProps): JSX.Element {
           path={AppRoute.Main}
           element={
             <MainPage
-              placeCardCount={placeCardCount}
-              offers={offers}
               authorizationStatus={AuthorizationStatus.Auth}
             />
           }

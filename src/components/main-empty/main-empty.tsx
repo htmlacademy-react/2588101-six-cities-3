@@ -1,6 +1,13 @@
-import Cities from '../../components/cities/cities';
+import CitiesList from '../../components/cities-list/cities-list';
+import {useAppSelector} from '../../hooks';
 
-function MainEmpty(): JSX.Element {
+type MainEmptyProps = {
+citiesList: string[];
+};
+
+function MainEmpty({citiesList}: MainEmptyProps): JSX.Element {
+  const activeCity = useAppSelector((state) => state.activeCity);
+
   return (
     <div className="page page--gray page--main">
       <main className="page__main page__main--index page__main--index-empty">
@@ -8,7 +15,7 @@ function MainEmpty(): JSX.Element {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              <Cities />
+              <CitiesList citiesList={citiesList} />
             </ul>
           </section>
         </div>
@@ -17,7 +24,7 @@ function MainEmpty(): JSX.Element {
             <section className="cities__no-places">
               <div className="cities__status-wrapper tabs__content">
                 <b className="cities__status">No places to stay available</b>
-                <p className="cities__status-description">We could not find any property available at the moment in Dusseldorf</p>
+                <p className="cities__status-description">We could not find any property available at the moment in {activeCity}</p>
               </div>
             </section>
             <div className="cities__right-section"></div>

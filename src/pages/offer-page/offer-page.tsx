@@ -3,7 +3,6 @@ import NearPlacesList from '../../components/near-places-list/near-places-list';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import CitiesMap from '../../components/cities-map/cities-map';
 import {Offers} from '../../types/offer';
-import {CITY} from '../../mocks/city';
 import {mockReviews} from '../../mocks/reviews';
 import {Navigate, useParams} from 'react-router-dom';
 import {AuthorizationStatus} from '../../const';
@@ -161,7 +160,7 @@ function OfferPage({authorizationStatus, offers}: OfferPageProps): JSX.Element {
             className={`${offers.length === 0 ? 'offer__map' : ''} map`}
           >
             <CitiesMap
-              city={CITY}
+              city={offer.city}
               offers={offers}
               activeId={offer.id}
             />
