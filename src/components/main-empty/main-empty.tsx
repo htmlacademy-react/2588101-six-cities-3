@@ -1,8 +1,9 @@
 import CitiesList from '../../components/cities-list/cities-list';
 import {useAppSelector} from '../../hooks';
+import {City} from '../../types/offer';
 
 type MainEmptyProps = {
-citiesList: string[];
+citiesList: City[];
 };
 
 function MainEmpty({citiesList}: MainEmptyProps): JSX.Element {
@@ -24,7 +25,7 @@ function MainEmpty({citiesList}: MainEmptyProps): JSX.Element {
             <section className="cities__no-places">
               <div className="cities__status-wrapper tabs__content">
                 <b className="cities__status">No places to stay available</b>
-                <p className="cities__status-description">We could not find any property available at the moment in {activeCity}</p>
+                <p className="cities__status-description">We could not find any property available at the moment in {activeCity.name}</p>
               </div>
             </section>
             <div className="cities__right-section"></div>

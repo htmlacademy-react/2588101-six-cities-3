@@ -8,7 +8,7 @@ import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT} from '../../const';
 type CitiesMapProps = {
 city: City;
 offers: Offers;
-activeId: undefined | string;
+activeOfferId?: undefined | string;
 };
 
 const defaultCustomIcon = new Icon({
@@ -23,9 +23,15 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function CitiesMap({city, offers, activeId}: CitiesMapProps): JSX.Element {
+function CitiesMap({city, offers, activeOfferId}: CitiesMapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
+
+  useEffect(() => {
+    if(map) {
+      map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
+    }
+  });
 
   useEffect(() => {
     if (map) {
@@ -37,7 +43,7 @@ function CitiesMap({city, offers, activeId}: CitiesMapProps): JSX.Element {
         });
 
         marker.setIcon(
-          activeId !== undefined && activeId === offer.id
+          activeOfferId !== undefined && activeOfferId === offer.id
             ? currentCustomIcon
             : defaultCustomIcon
         )
@@ -48,7 +54,7 @@ function CitiesMap({city, offers, activeId}: CitiesMapProps): JSX.Element {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, offers, activeId]);
+  }, [map, offers, activeOfferId]);
 
   return (
     <div

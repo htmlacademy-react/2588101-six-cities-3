@@ -3,12 +3,15 @@ import {NavLink} from 'react-router-dom';
 import {useAppDispatch} from '../../hooks/index';
 import {changeActiveCity} from '../../store/action';
 import {useAppSelector} from '../../hooks';
+import {City} from '../../types/offer';
+import {CITIES} from '../../mocks/cities';
 
 type CitiesListProps = {
-citiesList: string[];
+citiesList: City[];
 };
 
 function CitiesList({citiesList}: CitiesListProps): JSX.Element {
+
   const dispatch = useAppDispatch();
   const activeCity = useAppSelector((state) => state.activeCity);
 
@@ -16,21 +19,25 @@ function CitiesList({citiesList}: CitiesListProps): JSX.Element {
     const selectedCity = evt.currentTarget.textContent;
 
     if (selectedCity) {
-      dispatch(changeActiveCity({activeCity: selectedCity}));
+      const currentCity = CITIES.find((city) => city.name === selectedCity);
+
+      if (currentCity) {
+        dispatch(changeActiveCity({activeCity: currentCity}));
+      }
     }
   };
 
   return (
     <ul className="locations__list tabs__list">
       {citiesList.map((city, id) => {
-        const keyValue = `${id}-${city}`;
+        const keyValue = `${id}-${city.name}`;
         return (
           <li key={keyValue} className="locations__item">
             <NavLink
               onClick={onCityClick}
-              className={`locations__item-link tabs__item ${city === activeCity ? 'tabs__item--active' : ''}`} to="#"
+              className={`locations__item-link tabs__item ${city.name === activeCity.name ? 'tabs__item--active' : ''}`} to="#"
             >
-              <span>{city}</span>
+              <span>{city.name}</span>
             </NavLink>
           </li>
         );
