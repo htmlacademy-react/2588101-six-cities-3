@@ -67,7 +67,7 @@ function MainPage({authorizationStatus}: MainPageProps): JSX.Element {
               >
                 <CitiesMap
                   city={activeCity}
-                  offers={offers}
+                  offers={activeCityOffers}
                   activeOfferId={activeOfferId}
                 />
               </section>
