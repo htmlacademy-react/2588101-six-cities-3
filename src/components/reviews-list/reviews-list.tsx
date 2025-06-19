@@ -1,13 +1,14 @@
 import ReviewsItem from '../../components/reviews-item/reviews-item';
 import ReviewsForm from '../../components/reviews-form/reviews-form';
-import {Review} from '../../types/review';
+import {useAppSelector} from '../../hooks';
 
 type ReviewsListProps = {
   isAuth: boolean;
-  reviews: Review[];
 };
 
-function ReviewsList({isAuth, reviews}: ReviewsListProps): JSX.Element {
+function ReviewsList({isAuth}: ReviewsListProps): JSX.Element {
+  const reviews = useAppSelector((state) => state.reviews);
+
   return (
     <ul className="reviews__list">
       {reviews.map((review, id) => {

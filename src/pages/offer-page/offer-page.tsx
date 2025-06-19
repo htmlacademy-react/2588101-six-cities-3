@@ -2,17 +2,18 @@ import Header from '../../components/header/header';
 import NearPlacesList from '../../components/near-places-list/near-places-list';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import CitiesMap from '../../components/cities-map/cities-map';
-import {Offers} from '../../types/offer';
-import {mockReviews} from '../../mocks/reviews';
+import {useAppSelector} from '../../hooks';
 import {Navigate, useParams} from 'react-router-dom';
 import {AuthorizationStatus} from '../../const';
 
 type OfferPageProps = {
   authorizationStatus: AuthorizationStatus;
-  offers: Offers;
 };
 
-function OfferPage({authorizationStatus, offers}: OfferPageProps): JSX.Element {
+function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
+  const reviews = useAppSelector((state) => state.reviews);
+
   const params = useParams();
   const offer = offers.find((innerOffer) => innerOffer.id === params.id);
 
@@ -144,12 +145,11 @@ function OfferPage({authorizationStatus, offers}: OfferPageProps): JSX.Element {
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                {mockReviews.length > 0 &&
+                {reviews.length > 0 &&
                 <>
-                  <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{mockReviews.length}</span></h2>
+                  <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                   <ReviewsList
                     isAuth={authorizationStatus === AuthorizationStatus.Auth}
-                    reviews={mockReviews}
                   />
                 </>}
               </section>
