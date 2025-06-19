@@ -6,5 +6,6 @@ const changeActiveCity = createAction<{activeCity: City}>('changeActiveCity');
 const initOffers = createAction<Offer[]>('initOffers');
 const initReviews = createAction<{reviews: Review[]}>('initReviews');
 const setError = createAction<string | null>('setError');
+const setOffersLoadingStatus = createAction<boolean>('setOffersLoadingStatus');
 
-export {changeActiveCity, initOffers, initReviews, setError};
+export {changeActiveCity, initOffers, initReviews, setError, setOffersLoadingStatus};

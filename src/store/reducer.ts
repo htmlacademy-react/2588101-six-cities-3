@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {changeActiveCity, initOffers, initReviews, setError} from './action';
+import {changeActiveCity, initOffers, initReviews, setError, setOffersLoadingStatus} from './action';
 import {City, Offer} from '../types/offer';
 import {Review} from '../types/review';
 import {CITIES} from '../const';
@@ -9,6 +9,7 @@ activeCity: City;
 offers: Offer[];
 reviews: Review[];
 error: string | null;
+isOffersDataLoading: boolean;
 };
 
 const initialState: StateType = {
@@ -16,6 +17,7 @@ const initialState: StateType = {
   offers: [],
   reviews: [],
   error: null,
+  isOffersDataLoading: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -34,6 +36,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setError, (state, action) => {
       state.error = action.payload;
+    })
+    .addCase(setOffersLoadingStatus, (state, action) => {
+      state.isOffersDataLoading = action.payload;
     });
 });
 
