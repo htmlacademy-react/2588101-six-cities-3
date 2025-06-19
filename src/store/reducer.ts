@@ -23,7 +23,7 @@ const reducer = createReducer(initialState, (builder) => {
       state.activeCity = activeCity;
     })
     .addCase(initOffers, (state, action) => {
-      const {offers} = action.payload;
+      const offers = action.payload;
       state.offers = offers;
     })
     .addCase(initReviews, (state, action) => {

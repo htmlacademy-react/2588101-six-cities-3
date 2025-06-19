@@ -62,7 +62,7 @@ function MainPage({authorizationStatus}: MainPageProps): JSX.Element {
             <div className="cities__right-section">
               <section
                 style={{width: '100%'}}
-                className={`${offers.length && 'cities__map'} map`}
+                className={`${offers.length < 0 && 'cities__map'} map`}
               >
                 <CitiesMap
                   city={activeCity}
