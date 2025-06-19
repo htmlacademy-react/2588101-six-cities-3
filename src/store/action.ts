@@ -5,5 +5,6 @@ import {Review} from '../types/review';
 const changeActiveCity = createAction<{activeCity: City}>('changeActiveCity');
 const initOffers = createAction<Offer[]>('initOffers');
 const initReviews = createAction<{reviews: Review[]}>('initReviews');
+const setError = createAction<string | null>('setError');
 
-export {changeActiveCity, initOffers, initReviews};
+export {changeActiveCity, initOffers, initReviews, setError};

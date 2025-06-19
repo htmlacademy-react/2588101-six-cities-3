@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {changeActiveCity, initOffers, initReviews} from './action';
+import {changeActiveCity, initOffers, initReviews, setError} from './action';
 import {City, Offer} from '../types/offer';
 import {Review} from '../types/review';
 import {CITIES} from '../const';
@@ -8,12 +8,14 @@ type StateType = {
 activeCity: City;
 offers: Offer[];
 reviews: Review[];
+error: string | null;
 };
 
 const initialState: StateType = {
   activeCity: CITIES[0],
   offers: [],
   reviews: [],
+  error: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -29,6 +31,9 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(initReviews, (state, action) => {
       const {reviews} = action.payload;
       state.reviews = reviews;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
     });
 });
 
