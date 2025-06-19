@@ -2,15 +2,16 @@ import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import PlaceCardMark from '../../components/place-card-mark/place-card-mark';
 import {Link} from 'react-router-dom';
-import {Offers, Offer} from '../../types/offer';
+import {Offer} from '../../types/offer';
 import {AuthorizationStatus} from '../../const';
+import {useAppSelector} from '../../hooks';
 
 type FavoritesPageProps = {
-  offers: Offers;
   authorizationStatus: AuthorizationStatus;
 };
 
-function FavoritesPage({offers, authorizationStatus}: FavoritesPageProps): JSX.Element {
+function FavoritesPage({authorizationStatus}: FavoritesPageProps): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
   const filteredOffers = offers.filter((offer) => offer.isFavorite === true);
 
   const uniqCities: string[] = [];

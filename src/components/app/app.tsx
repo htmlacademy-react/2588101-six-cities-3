@@ -1,9 +1,5 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import {useEffect} from 'react';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import {useAppDispatch, useAppSelector} from '../../hooks';
-import {initOffers} from '../../store/action';
-import {offers as mockOffers} from '../../mocks/offers';
 import PrivateRoute from '../private-route/private-route';
 import MainPage from '../../pages/main-page/main-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
@@ -12,14 +8,6 @@ import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 
 function App(): JSX.Element {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(initOffers({offers: mockOffers}));
-  },[dispatch]);
-
-  const offers = useAppSelector((state) => state.offers);
-
   return (
     <BrowserRouter>
       <Routes>
@@ -38,7 +26,6 @@ function App(): JSX.Element {
               authorizationStatus={AuthorizationStatus.Auth}
             >
               <FavoritesPage
-                offers={offers}
                 authorizationStatus={AuthorizationStatus.Auth}
               />
             </PrivateRoute>
@@ -61,7 +48,6 @@ function App(): JSX.Element {
           element={
             <OfferPage
               authorizationStatus={AuthorizationStatus.Auth}
-              offers={offers}
             />
           }
         />

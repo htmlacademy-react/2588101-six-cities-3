@@ -4,7 +4,7 @@ import {useAppDispatch} from '../../hooks/index';
 import {changeActiveCity} from '../../store/action';
 import {useAppSelector} from '../../hooks';
 import {City} from '../../types/offer';
-import {CITIES} from '../../mocks/cities';
+import {CITIES} from '../../const';
 
 type CitiesListProps = {
 citiesList: City[];

@@ -3,9 +3,8 @@ import CitiesMap from '../../components/cities-map/cities-map';
 import Header from '../../components/header/header';
 import CitiesList from '../../components/cities-list/cities-list';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
-import {CITIES} from '../../mocks/cities';
 import {useState} from 'react';
-import {AuthorizationStatus, SortOption} from '../../const';
+import {AuthorizationStatus, SortOption, CITIES} from '../../const';
 import {useAppSelector} from '../../hooks';
 import {Offer} from '../../types/offer';
 
@@ -63,7 +62,7 @@ function MainPage({authorizationStatus}: MainPageProps): JSX.Element {
             <div className="cities__right-section">
               <section
                 style={{width: '100%'}}
-                className={`${offers.length === 0 ? 'cities__map' : ''} map`}
+                className={`${offers.length && 'cities__map'} map`}
               >
                 <CitiesMap
                   city={activeCity}
