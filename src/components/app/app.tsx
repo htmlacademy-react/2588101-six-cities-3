@@ -11,8 +11,9 @@ import LoadingPage from '../../pages/loading-page/loading-page';
 
 function App(): JSX.Element {
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
-  if (isOffersDataLoading) {
+  if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
     return (
       <LoadingPage />
     );
@@ -25,7 +26,7 @@ function App(): JSX.Element {
           path={AppRoute.Main}
           element={
             <MainPage
-              authorizationStatus={AuthorizationStatus.Auth}
+              authorizationStatus={authorizationStatus}
             />
           }
         />
@@ -33,10 +34,10 @@ function App(): JSX.Element {
           path={AppRoute.Favorites}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.Auth}
+              authorizationStatus={authorizationStatus}
             >
               <FavoritesPage
-                authorizationStatus={AuthorizationStatus.Auth}
+                authorizationStatus={authorizationStatus}
               />
             </PrivateRoute>
           }
@@ -49,7 +50,7 @@ function App(): JSX.Element {
           path="*"
           element={
             <NotFoundPage
-              authorizationStatus={AuthorizationStatus.Auth}
+              authorizationStatus={authorizationStatus}
             />
           }
         />
@@ -57,7 +58,7 @@ function App(): JSX.Element {
           path={AppRoute.Offer}
           element={
             <OfferPage
-              authorizationStatus={AuthorizationStatus.Auth}
+              authorizationStatus={authorizationStatus}
             />
           }
         />

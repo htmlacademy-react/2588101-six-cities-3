@@ -13,6 +13,8 @@ const REQUEST_TIMEOUT = 5000;
 
 const StatusCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
+  [StatusCodes.UNAUTHORIZED]: true,
+  [StatusCodes.NOT_FOUND]: true,
 };
 
 const shouldDisplayError = (response: AxiosResponse) => !!StatusCodeMapping[response.status];
@@ -28,7 +30,7 @@ export const createAPI = (): AxiosInstance => {
       const token = getToken();
 
       if (token && config.headers) {
-        config.headers['x-token'] = token;
+        config.headers['X-Token'] = token;
       }
 
       return config;
