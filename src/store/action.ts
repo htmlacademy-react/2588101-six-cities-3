@@ -1,11 +1,11 @@
 import {createAction} from '@reduxjs/toolkit';
 import {City, Offer} from '../types/offer';
 import {Review} from '../types/review';
+import {AuthorizationStatus} from '../const';
 
-const changeActiveCity = createAction<{activeCity: City}>('changeActiveCity');
-const initOffers = createAction<Offer[]>('initOffers');
-const initReviews = createAction<{reviews: Review[]}>('initReviews');
-const setError = createAction<string | null>('setError');
-const setOffersLoadingStatus = createAction<boolean>('setOffersLoadingStatus');
-
-export {changeActiveCity, initOffers, initReviews, setError, setOffersLoadingStatus};
+export const changeActiveCity = createAction<{activeCity: City}>('changeActiveCity');
+export const initOffers = createAction<Offer[]>('initOffers');
+export const initReviews = createAction<{reviews: Review[]}>('initReviews');
+export const setError = createAction<string | null>('setError');
+export const setOffersLoadingStatus = createAction<boolean>('setOffersLoadingStatus');
+export const requireAuthorization = createAction<AuthorizationStatus>('requireAuthorization');
