@@ -4,13 +4,8 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import CitiesMap from '../../components/cities-map/cities-map';
 import {useAppSelector} from '../../hooks';
 import {Navigate, useParams} from 'react-router-dom';
-import {AuthorizationStatus} from '../../const';
 
-type OfferPageProps = {
-  authorizationStatus: AuthorizationStatus;
-};
-
-function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
+function OfferPage(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const reviews = useAppSelector((state) => state.reviews);
 
@@ -23,7 +18,7 @@ function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
 
   return (
     <div className="page">
-      <Header isAuth={authorizationStatus === AuthorizationStatus.Auth} />
+      <Header />
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">
@@ -148,9 +143,7 @@ function OfferPage({authorizationStatus}: OfferPageProps): JSX.Element {
                 {reviews.length > 0 &&
                 <>
                   <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-                  <ReviewsList
-                    isAuth={authorizationStatus === AuthorizationStatus.Auth}
-                  />
+                  <ReviewsList />
                 </>}
               </section>
             </div>

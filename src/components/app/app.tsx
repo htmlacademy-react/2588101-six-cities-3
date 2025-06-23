@@ -1,6 +1,8 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {useAppSelector} from '../../hooks';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 import PrivateRoute from '../private-route/private-route';
 import MainPage from '../../pages/main-page/main-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
@@ -11,33 +13,30 @@ import LoadingPage from '../../pages/loading-page/loading-page';
 
 function App(): JSX.Element {
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
-  if (isOffersDataLoading) {
+  if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
     return (
       <LoadingPage />
     );
   }
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Main}
           element={
-            <MainPage
-              authorizationStatus={AuthorizationStatus.Auth}
-            />
+            <MainPage />
           }
         />
         <Route
           path={AppRoute.Favorites}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.Auth}
+              authorizationStatus={authorizationStatus}
             >
-              <FavoritesPage
-                authorizationStatus={AuthorizationStatus.Auth}
-              />
+              <FavoritesPage />
             </PrivateRoute>
           }
         />
@@ -48,21 +47,17 @@ function App(): JSX.Element {
         <Route
           path="*"
           element={
-            <NotFoundPage
-              authorizationStatus={AuthorizationStatus.Auth}
-            />
+            <NotFoundPage />
           }
         />
         <Route
           path={AppRoute.Offer}
           element={
-            <OfferPage
-              authorizationStatus={AuthorizationStatus.Auth}
-            />
+            <OfferPage />
           }
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

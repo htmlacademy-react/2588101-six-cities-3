@@ -4,15 +4,11 @@ import Header from '../../components/header/header';
 import CitiesList from '../../components/cities-list/cities-list';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
 import {useState} from 'react';
-import {AuthorizationStatus, SortOption, CITIES} from '../../const';
+import {SortOption, CITIES} from '../../const';
 import {useAppSelector} from '../../hooks';
 import {Offer} from '../../types/offer';
 
-type MainPageProps = {
-  authorizationStatus: AuthorizationStatus;
-}
-
-function MainPage({authorizationStatus}: MainPageProps): JSX.Element {
+function MainPage(): JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState<string>();
   const [activeSort, setActiveSort] = useState(SortOption.Popular);
 
@@ -37,8 +33,9 @@ function MainPage({authorizationStatus}: MainPageProps): JSX.Element {
 
   return (
     <div className="page page--gray page--main">
-      <Header isAuth={authorizationStatus === AuthorizationStatus.Auth} />
-
+      <header className="header">
+        <Header />
+      </header>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
