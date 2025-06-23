@@ -3,14 +3,9 @@ import Footer from '../../components/footer/footer';
 import PlaceCardMark from '../../components/place-card-mark/place-card-mark';
 import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer';
-import {AuthorizationStatus} from '../../const';
 import {useAppSelector} from '../../hooks';
 
-type FavoritesPageProps = {
-  authorizationStatus: AuthorizationStatus;
-};
-
-function FavoritesPage({authorizationStatus}: FavoritesPageProps): JSX.Element {
+function FavoritesPage(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   const filteredOffers = offers.filter((offer) => offer.isFavorite === true);
 
@@ -23,7 +18,7 @@ function FavoritesPage({authorizationStatus}: FavoritesPageProps): JSX.Element {
 
   return (
     <div className="page">
-      <Header isAuth={authorizationStatus === AuthorizationStatus.Auth} />
+      <Header />
 
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">

@@ -27,9 +27,7 @@ function App(): JSX.Element {
         <Route
           path={AppRoute.Main}
           element={
-            <MainPage
-              authorizationStatus={authorizationStatus}
-            />
+            <MainPage />
           }
         />
         <Route
@@ -38,9 +36,7 @@ function App(): JSX.Element {
             <PrivateRoute
               authorizationStatus={authorizationStatus}
             >
-              <FavoritesPage
-                authorizationStatus={authorizationStatus}
-              />
+              <FavoritesPage />
             </PrivateRoute>
           }
         />
@@ -51,17 +47,13 @@ function App(): JSX.Element {
         <Route
           path="*"
           element={
-            <NotFoundPage
-              authorizationStatus={authorizationStatus}
-            />
+            <NotFoundPage />
           }
         />
         <Route
           path={AppRoute.Offer}
           element={
-            <OfferPage
-              authorizationStatus={authorizationStatus}
-            />
+            <OfferPage />
           }
         />
       </Routes>

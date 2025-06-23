@@ -1,13 +1,11 @@
 import ReviewsItem from '../../components/reviews-item/reviews-item';
 import ReviewsForm from '../../components/reviews-form/reviews-form';
 import {useAppSelector} from '../../hooks';
+import {AuthorizationStatus} from '../../const';
 
-type ReviewsListProps = {
-  isAuth: boolean;
-};
-
-function ReviewsList({isAuth}: ReviewsListProps): JSX.Element {
+function ReviewsList(): JSX.Element {
   const reviews = useAppSelector((state) => state.reviews);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   return (
     <ul className="reviews__list">
@@ -21,7 +19,7 @@ function ReviewsList({isAuth}: ReviewsListProps): JSX.Element {
         );
       })}
 
-      {isAuth && <ReviewsForm />}
+      {authorizationStatus === AuthorizationStatus.Auth && <ReviewsForm />}
     </ul>);
 }
 
