@@ -72,13 +72,13 @@ export enum AppRoute {
  Main = '/',
  Favorites = '/favorites',
  Login = '/login',
- Offer = '/offer/:id'
+ Offer = '/offer/:id',
 }
 
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
-  Unknown = 'UNKNOWN'
+  Unknown = 'UNKNOWN',
 }
 
 export enum APIRoute {
@@ -87,4 +87,13 @@ export enum APIRoute {
  Favorites = '/favorites',
  Login = '/login',
  Logout = '/logout',
+}
+
+export enum NameSpace {
+  Data = 'DATA',
+  App = 'APP',
+  User = 'USER',
+  Offer = 'OFFER',
+  Review = 'REVIEW',
+  Favorite = 'FAVORITE',
 }
