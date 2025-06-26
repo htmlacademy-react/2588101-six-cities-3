@@ -1,6 +1,6 @@
 import {store} from '../store/index';
 import {AuthorizationStatus, RequestStatus} from '../const';
-import {Offer, City} from '../types/offer';
+import {Offer, FullOffer, City} from '../types/offer';
 import {Review} from '../types/review';
 
 export type UserProcess = {
@@ -18,6 +18,11 @@ export type AppData = {
 
 export type ReviewsData = {
   reviews: Review[];
+  status: RequestStatus;
+};
+
+export type FullOfferData = {
+  info: FullOffer | null;
   status: RequestStatus;
 };
 
