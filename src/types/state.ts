@@ -1,5 +1,5 @@
 import {store} from '../store/index';
-import {AuthorizationStatus} from '../const';
+import {AuthorizationStatus, RequestStatus} from '../const';
 import {Offer, City} from '../types/offer';
 import {Review} from '../types/review';
 
@@ -13,9 +13,13 @@ activeCity: City;
 
 export type AppData = {
   offers: Offer[];
-  reviews: Review[];
   isOffersDataLoading: boolean;
 }
+
+export type ReviewsData = {
+  reviews: Review[];
+  status: RequestStatus;
+};
 
 export type State = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

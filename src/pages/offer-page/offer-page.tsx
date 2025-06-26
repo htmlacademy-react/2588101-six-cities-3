@@ -5,10 +5,11 @@ import CitiesMap from '../../components/cities-map/cities-map';
 import {useAppSelector} from '../../hooks';
 import {Navigate, useParams} from 'react-router-dom';
 import {getOffers} from '../../store/app-data/app-data.selectors';
+import {getReviews} from '../../store/reviews-data/reviews-data.selectors';
 
 function OfferPage(): JSX.Element {
   const offers = useAppSelector(getOffers);
-  const reviews = useAppSelector((state) => state.reviews);
+  const reviews = useAppSelector(getReviews);
 
   const params = useParams();
   const offer = offers.find((innerOffer) => innerOffer.id === params.id);

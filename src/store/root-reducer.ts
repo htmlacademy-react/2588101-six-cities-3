@@ -3,9 +3,11 @@ import {NameSpace} from '../const';
 import {appData} from './app-data/app-data';
 import {appProcess} from './app-process/app-process';
 import {userProcess} from './user-process/user-process';
+import {reviewsData} from './reviews-data/reviews-data';
 
 export const rootReducer = combineReducers({
   [NameSpace.Data]: appData.reducer,
   [NameSpace.App]: appProcess.reducer,
   [NameSpace.User]: userProcess.reducer,
+  [NameSpace.Review]: reviewsData.reducer,
 });

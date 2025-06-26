@@ -97,3 +97,10 @@ export enum NameSpace {
   Review = 'REVIEW',
   Favorite = 'FAVORITE',
 }
+
+export const enum RequestStatus {
+  Idle,
+  Loading,
+  Success,
+  Failed,
+}

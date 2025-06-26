@@ -3,9 +3,10 @@ import ReviewsForm from '../../components/reviews-form/reviews-form';
 import {useAppSelector} from '../../hooks';
 import {AuthorizationStatus} from '../../const';
 import {getAuthorizationStatus} from '../../store/user-process/user-process.selectors';
+import {getReviews} from '../../store/reviews-data/reviews-data.selectors';
 
 function ReviewsList(): JSX.Element {
-  const reviews = useAppSelector((state) => state.reviews);
+  const reviews = useAppSelector(getReviews);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return (
