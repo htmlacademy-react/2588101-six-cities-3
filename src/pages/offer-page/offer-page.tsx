@@ -4,9 +4,10 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import CitiesMap from '../../components/cities-map/cities-map';
 import {useAppSelector} from '../../hooks';
 import {Navigate, useParams} from 'react-router-dom';
+import {getOffers} from '../../store/app-data/app-data.selectors';
 
 function OfferPage(): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector(getOffers);
   const reviews = useAppSelector((state) => state.reviews);
 
   const params = useParams();

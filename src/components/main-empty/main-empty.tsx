@@ -1,13 +1,14 @@
 import CitiesList from '../../components/cities-list/cities-list';
 import {useAppSelector} from '../../hooks';
 import {City} from '../../types/offer';
+import {getCity} from '../../store/app-process/app-process.selectors';
 
 type MainEmptyProps = {
 citiesList: City[];
 };
 
 function MainEmpty({citiesList}: MainEmptyProps): JSX.Element {
-  const activeCity = useAppSelector((state) => state.activeCity);
+  const activeCity = useAppSelector(getCity);
 
   return (
     <div className="page page--gray page--main">

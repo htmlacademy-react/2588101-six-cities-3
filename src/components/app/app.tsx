@@ -1,6 +1,8 @@
 import {Routes, Route} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import {AppRoute} from '../../const';
 import {useAppSelector} from '../../hooks';
+import {getOffersDataLoadingStatus} from '../../store/app-data/app-data.selectors';
+import {getAuthCheckedStatus} from '../../store/user-process/user-process.selectors';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 import PrivateRoute from '../private-route/private-route';
@@ -12,10 +14,10 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import LoadingPage from '../../pages/loading-page/loading-page';
 
 function App(): JSX.Element {
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
+  const isAuthChecked = useAppSelector(getAuthCheckedStatus);
 
-  if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
+  if (!isAuthChecked || isOffersDataLoading) {
     return (
       <LoadingPage />
     );

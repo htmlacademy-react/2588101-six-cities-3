@@ -4,9 +4,10 @@ import PlaceCardMark from '../../components/place-card-mark/place-card-mark';
 import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer';
 import {useAppSelector} from '../../hooks';
+import {getOffers} from '../../store/app-data/app-data.selectors';
 
 function FavoritesPage(): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector(getOffers);
   const filteredOffers = offers.filter((offer) => offer.isFavorite === true);
 
   const uniqCities: string[] = [];
