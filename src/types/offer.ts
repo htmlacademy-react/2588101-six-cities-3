@@ -37,4 +37,9 @@ export type FullOffer = Offer & {
   maxAdults: number;
 };
 
+export type FavoritesData = {
+  id: FullOffer['id'];
+  isFavorite: boolean;
+};
+
 export type Offers = Offer[];

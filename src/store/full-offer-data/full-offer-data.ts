@@ -1,10 +1,11 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {fetchFullOfferAction} from '../api-actions';
+import {fetchFullOfferAction, fetchNearbyOffersAction, fetchFavoritesAction} from '../api-actions';
 import {NameSpace, RequestStatus} from '../../const';
 import {FullOfferData} from '../../types/state';
 
 const initialState: FullOfferData = {
   info: null,
+  nearby: [],
   status: RequestStatus.Idle,
 };
 
@@ -14,6 +15,7 @@ export const fullOfferData = createSlice({
   reducers: {
     clearFullOffer: (state) => {
       state.info = null;
+      state.nearby = [];
       state.status = RequestStatus.Idle;
     }
   },
@@ -28,6 +30,16 @@ export const fullOfferData = createSlice({
       })
       .addCase(fetchFullOfferAction.pending, (state) => {
         state.status = RequestStatus.Loading;
+      })
+      .addCase(fetchNearbyOffersAction.fulfilled, (state, action) => {
+        state.nearby = action.payload;
+      })
+      .addCase(fetchFavoritesAction.fulfilled, (state, action) => {
+        const changedOffer = action.payload;
+
+        if (state.info?.id === changedOffer.id) {
+          state.info.isFavorite = changedOffer.isFavorite;
+        }
       });
   },
 });
