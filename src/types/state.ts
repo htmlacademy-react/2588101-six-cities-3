@@ -25,6 +25,7 @@ export type FullOfferData = {
   info: FullOffer | null;
   nearby: Offer[];
   status: RequestStatus;
+  activeOfferId?: Offer['id'] | null;
 };
 
 export type State = ReturnType<typeof store.getState>;

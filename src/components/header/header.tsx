@@ -2,7 +2,7 @@ import Logo from '../../components/logo/logo';
 import {Link} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {useAppSelector, useAppDispatch} from '../../hooks';
-import {logoutAction} from '../../store/api-actions';
+import {logout} from '../../store/api-actions';
 import {getAuthorizationStatus} from '../../store/user-process/user-process.selectors';
 
 function Header(): JSX.Element {
@@ -39,7 +39,7 @@ function Header(): JSX.Element {
                   <Link className="header__nav-link"
                     onClick={(evt) => {
                       evt.preventDefault();
-                      dispatch(logoutAction());
+                      dispatch(logout());
                     }}
                     to='/'
                   >

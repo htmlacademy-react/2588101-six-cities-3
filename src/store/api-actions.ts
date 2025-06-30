@@ -9,20 +9,20 @@ import {saveToken, dropToken} from '../services/token';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
 
-export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
+export const fetchAllOffers = createAsyncThunk<Offer[], undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }
 >(
-  'fetchOffers',
+  'fetchAllOffers',
   async (_arg, {extra: api}) => {
     const {data} = await api.get<Offer[]>(APIRoute.Offers);
     return data;
   },
 );
 
-export const fetchFullOfferAction = createAsyncThunk<FullOffer, string, {
+export const fetchFullOffer = createAsyncThunk<FullOffer, string, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -35,7 +35,7 @@ export const fetchFullOfferAction = createAsyncThunk<FullOffer, string, {
   },
 );
 
-export const fetchNearbyOffersAction = createAsyncThunk<Offer[], string,{
+export const fetchNearbyOffers = createAsyncThunk<Offer[], string,{
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -48,7 +48,7 @@ export const fetchNearbyOffersAction = createAsyncThunk<Offer[], string,{
   },
 );
 
-export const fetchFavoritesAction = createAsyncThunk<Offer, FavoritesData,{
+export const fetchFavorites = createAsyncThunk<Offer, FavoritesData,{
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -62,7 +62,7 @@ export const fetchFavoritesAction = createAsyncThunk<Offer, FavoritesData,{
   },
 );
 
-export const fetchReviewsAction = createAsyncThunk<Review[], FullOffer['id'], {
+export const fetchReviews = createAsyncThunk<Review[], FullOffer['id'], {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -75,7 +75,7 @@ export const fetchReviewsAction = createAsyncThunk<Review[], FullOffer['id'], {
   },
 );
 
-export const postReviewsAction = createAsyncThunk<Review, PostReview, {
+export const postReviews = createAsyncThunk<Review, PostReview, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -88,7 +88,7 @@ export const postReviewsAction = createAsyncThunk<Review, PostReview, {
   },
 );
 
-export const checkAuthAction = createAsyncThunk<void, undefined, {
+export const checkAuth = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -100,7 +100,7 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   },
 );
 
-export const loginAction = createAsyncThunk<void, AuthData, {
+export const login = createAsyncThunk<void, AuthData, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -114,7 +114,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
   },
 );
 
-export const logoutAction = createAsyncThunk<void, undefined, {
+export const logout = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;

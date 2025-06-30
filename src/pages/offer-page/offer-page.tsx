@@ -3,18 +3,61 @@ import NearPlacesList from '../../components/near-places-list/near-places-list';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import CitiesMap from '../../components/cities-map/cities-map';
 import {useAppSelector} from '../../hooks';
+import {useActionCreators} from '../../hooks/index'; // попробовать от этого избавиться
 import {Navigate, useParams} from 'react-router-dom';
+import {useEffect} from 'react';
 import {getOffers} from '../../store/app-data/app-data.selectors';
 import {getReviews} from '../../store/reviews-data/reviews-data.selectors';
+import {offersActions} from '../../store/full-offer-data/full-offer-data';
+import {reviewsActions} from '../../store/reviews-data/reviews-data';
+import {getFullOffer, getNearbyOffers, getOfferStatus} from '../../store/full-offer-data/full-offer-data.selectors';
+import {RequestStatus} from '../../const';
+import LoadingPage from '../loading-page/loading-page';
+
+const allActions = {
+  ...offersActions,
+  ...reviewsActions
+};
 
 function OfferPage(): JSX.Element {
+
+  const {
+    clearFullOffer,
+    setActiveOfferId,
+    fetchFullOffer,
+    fetchNearbyOffers,
+    fetchReviews
+  } = useActionCreators(allActions);
+
   const offers = useAppSelector(getOffers);
+  const fullOffer = useAppSelector(getFullOffer);
+  const status = useAppSelector(getOfferStatus);
+  const nearbyOffers = useAppSelector(getNearbyOffers);
+
   const reviews = useAppSelector(getReviews);
 
-  const params = useParams();
-  const offer = offers.find((innerOffer) => innerOffer.id === params.id);
+  const {id} = useParams() as {id: string};
 
-  if (!offer) {
+  useEffect(() => {
+    if (status === RequestStatus.Idle) {
+      setActiveOfferId(id);
+      Promise.all([fetchFullOffer(id), fetchNearbyOffers(id), fetchReviews(id)]);
+    }
+  }, [fetchFullOffer, setActiveOfferId, fetchNearbyOffers, fetchReviews, id, status]);
+
+  useEffect(() => {
+    clearFullOffer();
+  }, [id, clearFullOffer]);
+
+  if (status === RequestStatus.Failed) {
+    return <div>not_found</div>;
+  }
+
+  if (status === RequestStatus.Loading || !fullOffer) {
+    return <LoadingPage />;
+  }
+
+  if (!fullOffer) {
     return <Navigate to={'*'} />;
   }
 
@@ -47,13 +90,13 @@ function OfferPage(): JSX.Element {
           </div>
           <div className="offer__container container">
             <div className="offer__wrapper">
-              {offer.isPremium &&
+              {fullOffer.isPremium &&
               <div className="offer__mark">
                 <span>Premium</span>
               </div>}
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
-                  {offer.title}
+                  {fullOffer.title}
                 </h1>
                 <button className="offer__bookmark-button button" type="button">
                   <svg className="offer__bookmark-icon" width="31" height="33">
@@ -64,10 +107,10 @@ function OfferPage(): JSX.Element {
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{width: `${Math.round(offer.rating) * 20}%`}}/>
+                  <span style={{width: `${Math.round(fullOffer.rating) * 20}%`}}/>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="offer__rating-value rating__value">{offer.rating}</span>
+                <span className="offer__rating-value rating__value">{fullOffer.rating}</span>
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
@@ -81,7 +124,7 @@ function OfferPage(): JSX.Element {
                 </li>
               </ul>
               <div className="offer__price">
-                <b className="offer__price-value">&euro;{offer.price}</b>
+                <b className="offer__price-value">&euro;{fullOffer.price}</b>
                 <span className="offer__price-text">&nbsp;night</span>
               </div>
               <div className="offer__inside">
@@ -155,9 +198,9 @@ function OfferPage(): JSX.Element {
             className={`${offers.length === 0 ? 'offer__map' : ''} map`}
           >
             <CitiesMap
-              city={offer.city}
-              offers={offers}
-              activeOfferId={offer.id}
+              city={fullOffer.city}
+              offers={nearbyOffers}
+              activeOfferId={fullOffer.id}
             />
           </section>
         </section>
@@ -166,7 +209,7 @@ function OfferPage(): JSX.Element {
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
-                <NearPlacesList offers={offers} />
+                <NearPlacesList offers={nearbyOffers} />
               </div>
             </section>
           </div>}

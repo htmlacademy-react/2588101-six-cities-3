@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {useRef, FormEvent} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {useAppDispatch} from '../../hooks';
-import {loginAction} from '../../store/api-actions';
+import {login} from '../../store/api-actions';
 import {AppRoute} from '../../const';
 
 const PASSWORD_PATTERN = /([a-zA-Z]+[0-9]|[0-9]+[a-zA-Z])[a-zA-Z0-9]*/;
@@ -20,7 +20,7 @@ function LoginPage(): JSX.Element {
 
     if (emailRef.current !== null && passwordRef.current !== null) {
       if (PASSWORD_PATTERN.test(passwordRef.current.value)) {
-        dispatch(loginAction({
+        dispatch(login({
           login: emailRef.current.value,
           password: passwordRef.current.value,
         }));
