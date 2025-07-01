@@ -49,6 +49,6 @@ const fullOfferData = createSlice({
   },
 });
 
-const offersActions = {...fullOfferData.actions, fetchNearbyOffers, fetchFullOffer};
+const fullOfferActions = {...fullOfferData.actions, fetchNearbyOffers, fetchFullOffer};
 
-export {offersActions, fullOfferData};
+export {fullOfferActions, fullOfferData};

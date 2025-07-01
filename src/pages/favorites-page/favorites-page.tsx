@@ -3,7 +3,7 @@ import Footer from '../../components/footer/footer';
 import PlaceCardMark from '../../components/place-card-mark/place-card-mark';
 import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer';
-import {useAppSelector} from '../../hooks';
+import {useAppSelector} from '../../hooks/types';
 import {getOffers} from '../../store/app-data/app-data.selectors';
 
 function FavoritesPage(): JSX.Element {

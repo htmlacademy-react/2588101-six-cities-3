@@ -1,5 +1,5 @@
 import CitiesList from '../../components/cities-list/cities-list';
-import {useAppSelector} from '../../hooks';
+import {useAppSelector} from '../../hooks/types';
 import {City} from '../../types/offer';
 import {getCity} from '../../store/app-process/app-process.selectors';
 

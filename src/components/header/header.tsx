@@ -1,7 +1,7 @@
 import Logo from '../../components/logo/logo';
 import {Link} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import {useAppSelector, useAppDispatch} from '../../hooks';
+import {useAppSelector, useAppDispatch} from '../../hooks/types';
 import {logout} from '../../store/api-actions';
 import {getAuthorizationStatus} from '../../store/user-process/user-process.selectors';
 

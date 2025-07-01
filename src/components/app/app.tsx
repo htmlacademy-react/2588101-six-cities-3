@@ -1,6 +1,6 @@
 import {Routes, Route} from 'react-router-dom';
 import {AppRoute} from '../../const';
-import {useAppSelector} from '../../hooks';
+import {useAppSelector} from '../../hooks/types';
 import {getOffersDataLoadingStatus} from '../../store/app-data/app-data.selectors';
 import {getAuthCheckedStatus} from '../../store/user-process/user-process.selectors';
 import HistoryRouter from '../history-route/history-route';

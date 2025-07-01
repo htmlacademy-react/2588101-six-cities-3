@@ -1,7 +1,8 @@
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import type {State, AppDispatch} from '../types/state';
-import {ActionCreatorsMapObject, AsyncThunk, bindActionCreators} from '@reduxjs/toolkit';
+import {ActionCreatorsMapObject, AsyncThunk, bindActionCreators, createAsyncThunk} from '@reduxjs/toolkit';
 import {useMemo} from 'react';
+import {AxiosInstance} from 'axios';
 
 export const useAppSelector: TypedUseSelectorHook<State> = useSelector;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
@@ -19,3 +20,9 @@ export const useActionCreators = <Actions extends ActionCreatorsMapObject>(actio
   // eslint-disable-next-line react-hooks/exhaustive-deps
   return useMemo(() => bindActionCreators(actions, dispatch), []);
 };
+
+export const createAppAsyncThunk = createAsyncThunk.withTypes<{
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>();

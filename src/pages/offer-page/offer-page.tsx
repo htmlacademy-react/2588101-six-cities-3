@@ -2,20 +2,19 @@ import Header from '../../components/header/header';
 import NearPlacesList from '../../components/near-places-list/near-places-list';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import CitiesMap from '../../components/cities-map/cities-map';
-import {useAppSelector} from '../../hooks';
-import {useActionCreators} from '../../hooks/index'; // попробовать от этого избавиться
+import {useAppSelector, useActionCreators} from '../../hooks/types';
 import {Navigate, useParams} from 'react-router-dom';
 import {useEffect} from 'react';
 import {getOffers} from '../../store/app-data/app-data.selectors';
 import {getReviews} from '../../store/reviews-data/reviews-data.selectors';
-import {offersActions} from '../../store/full-offer-data/full-offer-data';
+import {fullOfferActions} from '../../store/full-offer-data/full-offer-data';
 import {reviewsActions} from '../../store/reviews-data/reviews-data';
 import {getFullOffer, getNearbyOffers, getOfferStatus} from '../../store/full-offer-data/full-offer-data.selectors';
 import {RequestStatus} from '../../const';
 import LoadingPage from '../loading-page/loading-page';
 
 const allActions = {
-  ...offersActions,
+  ...fullOfferActions,
   ...reviewsActions
 };
 

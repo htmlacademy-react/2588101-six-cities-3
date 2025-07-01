@@ -1,6 +1,6 @@
 import ReviewsItem from '../../components/reviews-item/reviews-item';
 import ReviewsForm from '../../components/reviews-form/reviews-form';
-import {useAppSelector} from '../../hooks';
+import {useAppSelector} from '../../hooks/types';
 import {AuthorizationStatus} from '../../const';
 import {getAuthorizationStatus} from '../../store/user-process/user-process.selectors';
 import {getReviews} from '../../store/reviews-data/reviews-data.selectors';

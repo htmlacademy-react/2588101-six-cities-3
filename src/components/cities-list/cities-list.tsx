@@ -1,9 +1,8 @@
 import { MouseEvent } from 'react';
 import {NavLink} from 'react-router-dom';
-import {useAppDispatch} from '../../hooks/index';
+import {useAppDispatch, useAppSelector} from '../../hooks/types';
 import {changeActiveCity} from '../../store/app-process/app-process';
 import {getCity} from '../../store/app-process/app-process.selectors';
-import {useAppSelector} from '../../hooks';
 import {City} from '../../types/offer';
 import {CITIES} from '../../const';
 

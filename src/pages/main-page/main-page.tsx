@@ -5,7 +5,7 @@ import CitiesList from '../../components/cities-list/cities-list';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
 import {useState} from 'react';
 import {SortOption, CITIES} from '../../const';
-import {useAppSelector} from '../../hooks';
+import {useAppSelector} from '../../hooks/types';
 import {Offer} from '../../types/offer';
 import {getOffers} from '../../store/app-data/app-data.selectors';
 import {getCity} from '../../store/app-process/app-process.selectors';

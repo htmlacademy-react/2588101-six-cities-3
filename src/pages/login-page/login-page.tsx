@@ -2,7 +2,7 @@ import Logo from '../../components/logo/logo';
 import {Link} from 'react-router-dom';
 import {useRef, FormEvent} from 'react';
 import {useNavigate} from 'react-router-dom';
-import {useAppDispatch} from '../../hooks';
+import {useAppDispatch} from '../../hooks/types';
 import {login} from '../../store/api-actions';
 import {AppRoute} from '../../const';
 
