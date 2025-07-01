@@ -4,10 +4,12 @@ import {useAppSelector} from '../../hooks/types';
 import {AuthorizationStatus} from '../../const';
 import {getAuthorizationStatus} from '../../store/user-process/user-process.selectors';
 import {getReviews} from '../../store/reviews-data/reviews-data.selectors';
+import {getFullOffer} from '../../store/full-offer-data/full-offer-data.selectors';
 
 function ReviewsList(): JSX.Element {
   const reviews = useAppSelector(getReviews);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const fullOffer = useAppSelector(getFullOffer);
 
   return (
     <ul className="reviews__list">
@@ -21,7 +23,7 @@ function ReviewsList(): JSX.Element {
         );
       })}
 
-      {authorizationStatus === AuthorizationStatus.Auth && <ReviewsForm />}
+      {authorizationStatus === AuthorizationStatus.Auth && <ReviewsForm offerId={fullOffer?.id} />}
     </ul>);
 }
 

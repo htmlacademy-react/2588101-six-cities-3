@@ -1,6 +1,8 @@
 import {Review} from '../../types/review';
 import dayjs from 'dayjs';
 
+const STARS_STYLE_COEFF = 20;
+
 type ReviewsItemProps = {
 review: Review;
 };
@@ -21,7 +23,7 @@ function ReviewsItem({review}: ReviewsItemProps): JSX.Element {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: `${Math.round(rating) * 20}%`}}></span>
+            <span style={{width: `${Math.round(rating) * STARS_STYLE_COEFF}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

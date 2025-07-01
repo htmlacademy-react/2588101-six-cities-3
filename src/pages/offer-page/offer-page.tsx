@@ -52,7 +52,7 @@ function OfferPage(): JSX.Element {
             <div className="offer__wrapper">
               <OfferContainer offer={fullOffer} />
               <section className="offer__reviews reviews">
-                {reviews.length > 0 &&
+                {reviews && reviews.length > 0 &&
                 <>
                   <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                   <ReviewsList />
@@ -66,7 +66,7 @@ function OfferPage(): JSX.Element {
           >
             <CitiesMap
               city={fullOffer.city}
-              offers={nearbyOffers}
+              offers={offers}
               activeOfferId={fullOffer.id}
             />
           </section>
