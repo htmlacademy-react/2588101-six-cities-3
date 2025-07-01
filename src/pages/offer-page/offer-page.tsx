@@ -3,7 +3,7 @@ import NearPlacesList from '../../components/near-places-list/near-places-list';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import CitiesMap from '../../components/cities-map/cities-map';
 import {useAppSelector, useActionCreators} from '../../hooks/types';
-import {Navigate, useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import {useEffect} from 'react';
 import {getOffers} from '../../store/app-data/app-data.selectors';
 import {getReviews} from '../../store/reviews-data/reviews-data.selectors';
@@ -12,52 +12,32 @@ import {reviewsActions} from '../../store/reviews-data/reviews-data';
 import {getFullOffer, getNearbyOffers, getOfferStatus} from '../../store/full-offer-data/full-offer-data.selectors';
 import {RequestStatus} from '../../const';
 import LoadingPage from '../loading-page/loading-page';
-
-const allActions = {
-  ...fullOfferActions,
-  ...reviewsActions
-};
+import NotFoundPage from '../not-found-page/not-found-page';
 
 function OfferPage(): JSX.Element {
-
-  const {
-    clearFullOffer,
-    setActiveOfferId,
-    fetchFullOffer,
-    fetchNearbyOffers,
-    fetchReviews
-  } = useActionCreators(allActions);
-
   const offers = useAppSelector(getOffers);
   const fullOffer = useAppSelector(getFullOffer);
   const status = useAppSelector(getOfferStatus);
   const nearbyOffers = useAppSelector(getNearbyOffers);
-
   const reviews = useAppSelector(getReviews);
+
+  const {fetchFullOffer, fetchNearbyOffers} = useActionCreators(fullOfferActions);
+  const {fetchReviews} = useActionCreators(reviewsActions);
 
   const {id} = useParams() as {id: string};
 
   useEffect(() => {
     if (status === RequestStatus.Idle) {
-      setActiveOfferId(id);
       Promise.all([fetchFullOffer(id), fetchNearbyOffers(id), fetchReviews(id)]);
     }
-  }, [fetchFullOffer, setActiveOfferId, fetchNearbyOffers, fetchReviews, id, status]);
+  }, [fetchFullOffer, fetchNearbyOffers, fetchReviews, id, status]);
 
-  useEffect(() => {
-    clearFullOffer();
-  }, [id, clearFullOffer]);
-
-  if (status === RequestStatus.Failed) {
-    return <div>not_found</div>;
-  }
-
-  if (status === RequestStatus.Loading || !fullOffer) {
+  if (status === RequestStatus.Loading) {
     return <LoadingPage />;
   }
 
-  if (!fullOffer) {
-    return <Navigate to={'*'} />;
+  if (status === RequestStatus.Failed || !fullOffer) {
+    return <NotFoundPage />;
   }
 
   return (

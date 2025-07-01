@@ -21,7 +21,7 @@ function LoginPage(): JSX.Element {
     if (emailRef.current !== null && passwordRef.current !== null) {
       if (PASSWORD_PATTERN.test(passwordRef.current.value)) {
         dispatch(login({
-          login: emailRef.current.value,
+          email: emailRef.current.value,
           password: passwordRef.current.value,
         }));
       }

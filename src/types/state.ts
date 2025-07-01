@@ -2,9 +2,12 @@ import {store} from '../store/index';
 import {AuthorizationStatus, RequestStatus} from '../const';
 import {Offer, FullOffer, City} from '../types/offer';
 import {Review} from '../types/review';
+import {UserData} from '../types/user-data';
 
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus;
+  info: UserData | null;
+  status: RequestStatus;
 };
 
 export type AppProcess = {

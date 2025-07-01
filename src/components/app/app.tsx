@@ -2,7 +2,7 @@ import {Routes, Route} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import {useAppSelector} from '../../hooks/types';
 import {getOffersDataLoadingStatus} from '../../store/app-data/app-data.selectors';
-import {getAuthCheckedStatus} from '../../store/user-process/user-process.selectors';
+import {getAuthStatus} from '../../store/user-process/user-process.selectors';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 import PrivateRoute from '../private-route/private-route';
@@ -15,9 +15,9 @@ import LoadingPage from '../../pages/loading-page/loading-page';
 
 function App(): JSX.Element {
   const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
-  const isAuthChecked = useAppSelector(getAuthCheckedStatus);
+  const isUserAuth = useAppSelector(getAuthStatus);
 
-  if (!isAuthChecked || isOffersDataLoading) {
+  if (!isUserAuth || isOffersDataLoading) {
     return (
       <LoadingPage />
     );

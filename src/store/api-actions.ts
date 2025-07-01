@@ -66,10 +66,11 @@ export const checkAuth = createAppAsyncThunk<UserData, undefined>(
 
 export const login = createAppAsyncThunk<UserData, AuthData>(
   'login',
-  async (body, {dispatch, extra: api}) => {
-    const {data: {token}} = await api.post<UserData>(APIRoute.Login, body);
-    saveToken(token);
+  async ({email, password}, {dispatch, extra: api}) => {
+    const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
+    saveToken(data.token);
     dispatch(redirectToRoute(AppRoute.Main));
+    return data;
   },
 );
 
