@@ -2,6 +2,7 @@ import Header from '../../components/header/header';
 import NearPlacesList from '../../components/near-places-list/near-places-list';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import CitiesMap from '../../components/cities-map/cities-map';
+import OfferGallery from '../../components/offer-gallery/offer-gallery';
 import {useAppSelector, useActionCreators} from '../../hooks/types';
 import {useParams} from 'react-router-dom';
 import {useEffect} from 'react';
@@ -45,28 +46,7 @@ function OfferPage(): JSX.Element {
       <Header />
       <main className="page__main page__main--offer">
         <section className="offer">
-          <div className="offer__gallery-container container">
-            <div className="offer__gallery">
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/room.jpg" alt="Photo studio"/>
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio"/>
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-02.jpg" alt="Photo studio"/>
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-03.jpg" alt="Photo studio"/>
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/studio-01.jpg" alt="Photo studio"/>
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio"/>
-              </div>
-            </div>
-          </div>
+          <OfferGallery images={fullOffer.images} />
           <div className="offer__container container">
             <div className="offer__wrapper">
               {fullOffer.isPremium &&
