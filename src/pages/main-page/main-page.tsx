@@ -64,16 +64,11 @@ function MainPage(): JSX.Element {
                 </div>
               </section>
               <div className="cities__right-section">
-                <section
-                  style={{width: '100%'}}
-                  className={`${offers.length < 0 && 'cities__map'} map`}
-                >
-                  <CitiesMap
-                    city={activeCity}
-                    offers={activeCityOffers}
-                    activeOfferId={activeOfferId}
-                  />
-                </section>
+                <CitiesMap
+                  city={activeCity}
+                  offers={activeCityOffers}
+                  activeOfferId={activeOfferId}
+                />
               </div>
             </div>}
         </div>

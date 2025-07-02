@@ -60,16 +60,12 @@ function OfferPage(): JSX.Element {
               </section>
             </div>
           </div>
-          <section
-            style={{width: '100%'}}
-            className={`${offers.length === 0 ? 'offer__map' : ''} map`}
-          >
-            <CitiesMap
-              city={fullOffer.city}
-              offers={offers}
-              activeOfferId={fullOffer.id}
-            />
-          </section>
+          <CitiesMap
+            city={fullOffer.city}
+            offers={offers}
+            activeOfferId={fullOffer.id}
+            place="offer"
+          />
         </section>
         {offers && offers.length > 0 &&
           <div className="container">
