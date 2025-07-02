@@ -1,5 +1,6 @@
 import PlaceCard from '../place-card/place-card';
 import {Offers} from '../../types/offer';
+import {PlaceCardClass} from '../../const';
 
 type NearPlacesListProps = {
 offers: Offers;
@@ -17,7 +18,7 @@ function NearPlacesList({offers}: NearPlacesListProps): JSX.Element {
           <PlaceCard
             key={keyValue}
             offer={offer}
-            isNearPlace
+            placeCardClass={PlaceCardClass.NearPlaces}
           />
         );
       })}

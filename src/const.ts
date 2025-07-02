@@ -104,3 +104,9 @@ export const enum RequestStatus {
   Success,
   Failed,
 }
+
+export enum PlaceCardClass {
+  Favorites = 'favorites',
+  NearPlaces = 'near-places',
+  Cities = 'cities',
+}
