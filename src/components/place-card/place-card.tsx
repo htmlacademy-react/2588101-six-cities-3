@@ -27,7 +27,7 @@ function PlaceCard({
     >
       {isPremium && <PlaceCardMark />}
       <div className={`${isNearPlace ? 'near-places' : 'cities'}__image-wrapper place-card__image-wrapper`}>
-        <Link to={`offer/${id}`}>
+        <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
         </Link>
       </div>
@@ -46,7 +46,7 @@ function PlaceCard({
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`offer/${id}`}>{title}</Link>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{capitalizeFirst(type)}</p>
       </div>
