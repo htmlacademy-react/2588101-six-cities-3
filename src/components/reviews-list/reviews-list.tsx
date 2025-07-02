@@ -11,9 +11,11 @@ function ReviewsList(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const fullOffer = useAppSelector(getFullOffer);
 
+  const slicedReviews = reviews.slice(0, 10);
+
   return (
     <ul className="reviews__list">
-      {reviews.map((review, id) => {
+      {slicedReviews.map((review, id) => {
         const keyValue = `${id}-${review.id}`;
         return (
           <ReviewsItem
