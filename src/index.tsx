@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import {Provider} from 'react-redux';
 import App from './components/app/app';
 import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {store} from './store';
 import {fetchAllOffers, checkAuth} from './store/api-actions';
 
