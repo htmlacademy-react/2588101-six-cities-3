@@ -4,6 +4,8 @@ import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer';
 import {capitalizeFirst} from '../../utils';
 
+const STARS_STYLE_COEFF = 20;
+
 type PlaceCardProps = {
   offer: Offer;
   onHandleChangeActiveId?: (id?: string) => void;
@@ -39,7 +41,7 @@ function PlaceCard({
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${Math.round(rating) * 20}%`}}/>
+            <span style={{width: `${Math.round(rating) * STARS_STYLE_COEFF}%`}}/>
             <span className="visually-hidden">{rating}</span>
           </div>
         </div>

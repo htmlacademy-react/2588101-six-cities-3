@@ -23,5 +23,3 @@ export type PostReview = {
   body: Body;
   offerId: FullOffer['id'] | undefined;
 }
-
-export type Reviews = Review[];
