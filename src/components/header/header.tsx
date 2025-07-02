@@ -1,11 +1,13 @@
 import Logo from '../../components/logo/logo';
 import {Link} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import {useAppSelector, useAppDispatch} from '../../hooks';
-import {logoutAction} from '../../store/api-actions';
+import {useAppSelector, useAppDispatch} from '../../hooks/types';
+import {logout} from '../../store/api-actions';
+import {getAuthorizationStatus, getUserData} from '../../store/user-process/user-process.selectors';
 
 function Header(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const userData = useAppSelector(getUserData);
   const dispatch = useAppDispatch();
 
   return (
@@ -30,7 +32,7 @@ function Header(): JSX.Element {
                   <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Favorites}>
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                    <span className="header__user-name user__name">{userData?.email}</span>
                     <span className="header__favorite-count">3</span>
                   </Link>
                 </li>
@@ -38,7 +40,7 @@ function Header(): JSX.Element {
                   <Link className="header__nav-link"
                     onClick={(evt) => {
                       evt.preventDefault();
-                      dispatch(logoutAction());
+                      dispatch(logout());
                     }}
                     to='/'
                   >

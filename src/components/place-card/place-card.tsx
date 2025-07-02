@@ -2,6 +2,7 @@ import PlaceCardBookmark from '../../components/place-card-bookmark/place-card-b
 import PlaceCardMark from '../../components/place-card-mark/place-card-mark';
 import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer';
+import {capitalizeFirst} from '../../utils';
 
 type PlaceCardProps = {
   offer: Offer;
@@ -45,7 +46,7 @@ function PlaceCard({
         <h2 className="place-card__name">
           <Link to={`offer/${id}`}>{title}</Link>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{capitalizeFirst(type)}</p>
       </div>
     </article>
   );

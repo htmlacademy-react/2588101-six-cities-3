@@ -1,8 +1,8 @@
 import { MouseEvent } from 'react';
 import {NavLink} from 'react-router-dom';
-import {useAppDispatch} from '../../hooks/index';
-import {changeActiveCity} from '../../store/action';
-import {useAppSelector} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks/types';
+import {changeActiveCity} from '../../store/app-process/app-process';
+import {getCity} from '../../store/app-process/app-process.selectors';
 import {City} from '../../types/offer';
 import {CITIES} from '../../const';
 
@@ -13,7 +13,7 @@ citiesList: City[];
 function CitiesList({citiesList}: CitiesListProps): JSX.Element {
 
   const dispatch = useAppDispatch();
-  const activeCity = useAppSelector((state) => state.activeCity);
+  const activeCity = useAppSelector(getCity);
 
   const onCityClick = (evt: MouseEvent<HTMLSpanElement>) => {
     const selectedCity = evt.currentTarget.textContent;

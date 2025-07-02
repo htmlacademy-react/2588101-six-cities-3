@@ -5,8 +5,10 @@ import CitiesList from '../../components/cities-list/cities-list';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
 import {useState} from 'react';
 import {SortOption, CITIES} from '../../const';
-import {useAppSelector} from '../../hooks';
+import {useAppSelector} from '../../hooks/types';
 import {Offer} from '../../types/offer';
+import {getOffers} from '../../store/app-data/app-data.selectors';
+import {getCity} from '../../store/app-process/app-process.selectors';
 
 function MainPage(): JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState<string>();
@@ -14,8 +16,8 @@ function MainPage(): JSX.Element {
 
   const handleChangeActiveId = (id?: string) => setActiveOfferId(id);
 
-  const offers = useAppSelector((state) => state.offers);
-  const activeCity = useAppSelector((state) => state.activeCity);
+  const offers = useAppSelector(getOffers);
+  const activeCity = useAppSelector(getCity);
 
   const activeCityOffers = offers.filter((offer) => offer.city.name === activeCity.name);
 
