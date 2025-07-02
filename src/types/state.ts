@@ -31,5 +31,10 @@ export type FullOfferData = {
   activeOfferId?: Offer['id'] | null;
 };
 
+export type FavoriteData = {
+  items: Offer[];
+  status: RequestStatus;
+};
+
 export type State = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

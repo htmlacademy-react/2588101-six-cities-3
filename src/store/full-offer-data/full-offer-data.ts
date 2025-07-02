@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {fetchFullOffer, fetchNearbyOffers, fetchFavorites} from '../api-actions';
+import {fetchFullOffer, fetchNearbyOffers, postFavorite} from '../api-actions';
 import {NameSpace, RequestStatus} from '../../const';
 import {FullOfferData} from '../../types/state';
 import {Offer} from '../../types/offer';
@@ -39,7 +39,7 @@ const fullOfferData = createSlice({
       .addCase(fetchNearbyOffers.fulfilled, (state, action) => {
         state.nearby = action.payload;
       })
-      .addCase(fetchFavorites.fulfilled, (state, action) => {
+      .addCase(postFavorite.fulfilled, (state, action) => {
         const changedOffer = action.payload;
 
         if (state.info?.id === changedOffer.id) {
