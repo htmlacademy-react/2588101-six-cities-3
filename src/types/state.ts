@@ -16,7 +16,7 @@ activeCity: City;
 
 export type AppData = {
   offers: Offer[];
-  isOffersDataLoading: boolean;
+  status: RequestStatus;
 };
 
 export type ReviewsData = {

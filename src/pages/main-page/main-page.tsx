@@ -4,12 +4,14 @@ import Header from '../../components/header/header';
 import CitiesList from '../../components/cities-list/cities-list';
 import PlacesSorting from '../../components/places-sorting/places-sorting';
 import MainEmpty from '../../components/main-empty/main-empty';
-import {useState} from 'react';
-import {SortOption, CITIES} from '../../const';
-import {useAppSelector} from '../../hooks/types';
+import {useState, useEffect} from 'react';
+import {SortOption, CITIES, RequestStatus} from '../../const';
+import {useAppSelector, useActionCreators} from '../../hooks/types';
 import {Offer} from '../../types/offer';
-import {getOffers} from '../../store/app-data/app-data.selectors';
+import {allOffersActions} from '../../store/app-data/app-data';
+import {getAllOffers} from '../../store/app-data/app-data.selectors';
 import {getCity} from '../../store/app-process/app-process.selectors';
+import {getAllOffersStatus} from '../../store/app-data/app-data.selectors';
 
 function MainPage(): JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState<string>();
@@ -17,8 +19,16 @@ function MainPage(): JSX.Element {
 
   const handleChangeActiveId = (id?: string) => setActiveOfferId(id);
 
-  const offers = useAppSelector(getOffers);
+  const offers = useAppSelector(getAllOffers);
   const activeCity = useAppSelector(getCity);
+  const allOffersStatus = useAppSelector(getAllOffersStatus);
+  const {fetchAllOffers} = useActionCreators(allOffersActions);
+
+  useEffect(() => {
+    if (allOffersStatus === RequestStatus.Idle) {
+      fetchAllOffers();
+    }
+  }, [allOffersStatus, fetchAllOffers]);
 
   const activeCityOffers = offers.filter((offer) => offer.city.name === activeCity.name);
 
