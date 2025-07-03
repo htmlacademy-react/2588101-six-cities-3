@@ -9,12 +9,15 @@ import {useParams} from 'react-router-dom';
 import {useEffect} from 'react';
 import {getAllOffers} from '../../store/app-data/app-data.selectors';
 import {getReviews} from '../../store/reviews-data/reviews-data.selectors';
+import {getFullOffer, getNearbyOffers, getOfferStatus} from '../../store/full-offer-data/full-offer-data.selectors';
 import {fullOfferActions} from '../../store/full-offer-data/full-offer-data';
 import {reviewsActions} from '../../store/reviews-data/reviews-data';
-import {getFullOffer, getNearbyOffers, getOfferStatus} from '../../store/full-offer-data/full-offer-data.selectors';
 import {RequestStatus} from '../../const';
+import {sortReviewsByDate} from '../../utils';
 import LoadingPage from '../loading-page/loading-page';
 import NotFoundPage from '../not-found-page/not-found-page';
+
+const MAX_REVIEWS = 10;
 
 function OfferPage(): JSX.Element {
   const offers = useAppSelector(getAllOffers);
@@ -22,6 +25,8 @@ function OfferPage(): JSX.Element {
   const status = useAppSelector(getOfferStatus);
   const nearbyOffers = useAppSelector(getNearbyOffers);
   const reviews = useAppSelector(getReviews);
+
+  const sortedReviews = reviews.toSorted(sortReviewsByDate).slice(0, MAX_REVIEWS);
 
   const {fetchFullOffer, fetchNearbyOffers} = useActionCreators(fullOfferActions);
   const {fetchReviews} = useActionCreators(reviewsActions);
@@ -55,7 +60,7 @@ function OfferPage(): JSX.Element {
                 {reviews && reviews.length > 0 &&
                 <>
                   <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-                  <ReviewsList />
+                  <ReviewsList reviews={sortedReviews} />
                 </>}
               </section>
             </div>
