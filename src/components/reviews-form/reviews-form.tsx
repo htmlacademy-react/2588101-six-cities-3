@@ -16,7 +16,7 @@ type Form = HTMLFormElement & {
 const MAX_COMMENT_LENGTH = 300;
 const MIN_COMMENT_LENGTH = 50;
 
-const rating = [
+const ratingList = [
   {value: 5, label: 'perfect'},
   {value: 4, label: 'good'},
   {value: 3, label: 'not bad'},
@@ -54,7 +54,7 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
       pending: 'Sending',
       success: {
         render: () => {
-          setUserReview({...userReview, isformDisabled: false});
+          setUserReview({review: '', rating: 0, isformDisabled: false});
           form.reset();
           return 'Sent!';
         }
@@ -68,6 +68,9 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
     });
   };
 
+  const submitFlags = [!userReview.rating, userReview.review.length < MIN_COMMENT_LENGTH, userReview.isformDisabled, userReview.review.length > MAX_COMMENT_LENGTH];
+  const isSubmitDisabled = submitFlags.some((element) => element === true);
+
   return (
     <form className="reviews__form form"
       action="#"
@@ -76,7 +79,7 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {rating.map(({value, label}) => (
+        {ratingList.map(({value, label}) => (
           <Fragment key={value}>
             <input className="form__rating-input visually-hidden" name="rating" value={value} id={`${value}-stars`} type="radio"
               onChange={handleChange}
@@ -105,12 +108,13 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
       </textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-                To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{MIN_COMMENT_LENGTH} characters</b>.
+                To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least
+          <b className="reviews__text-amount">{MIN_COMMENT_LENGTH} characters</b>.
         </p>
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={!userReview.rating || userReview.review.length < MIN_COMMENT_LENGTH || userReview.isformDisabled}
+          disabled={isSubmitDisabled}
         >Submit
         </button>
       </div>
