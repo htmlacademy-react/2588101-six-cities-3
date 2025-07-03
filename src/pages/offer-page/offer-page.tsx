@@ -7,7 +7,7 @@ import OfferContainer from '../../components/offer-container/offer-container';
 import {useAppSelector, useActionCreators} from '../../hooks/types';
 import {useParams} from 'react-router-dom';
 import {useEffect} from 'react';
-import {getOffers} from '../../store/app-data/app-data.selectors';
+import {getAllOffers} from '../../store/app-data/app-data.selectors';
 import {getReviews} from '../../store/reviews-data/reviews-data.selectors';
 import {fullOfferActions} from '../../store/full-offer-data/full-offer-data';
 import {reviewsActions} from '../../store/reviews-data/reviews-data';
@@ -17,7 +17,7 @@ import LoadingPage from '../loading-page/loading-page';
 import NotFoundPage from '../not-found-page/not-found-page';
 
 function OfferPage(): JSX.Element {
-  const offers = useAppSelector(getOffers);
+  const offers = useAppSelector(getAllOffers);
   const fullOffer = useAppSelector(getFullOffer);
   const status = useAppSelector(getOfferStatus);
   const nearbyOffers = useAppSelector(getNearbyOffers);
@@ -60,16 +60,12 @@ function OfferPage(): JSX.Element {
               </section>
             </div>
           </div>
-          <section
-            style={{width: '100%'}}
-            className={`${offers.length === 0 ? 'offer__map' : ''} map`}
-          >
-            <CitiesMap
-              city={fullOffer.city}
-              offers={offers}
-              activeOfferId={fullOffer.id}
-            />
-          </section>
+          <CitiesMap
+            city={fullOffer.city}
+            offers={offers}
+            activeOfferId={fullOffer.id}
+            place="offer"
+          />
         </section>
         {offers && offers.length > 0 &&
           <div className="container">

@@ -31,8 +31,16 @@ export const fetchNearbyOffers = createAppAsyncThunk<Offer[], string>(
   },
 );
 
-export const fetchFavorites = createAppAsyncThunk<Offer, FavoritesData>(
+export const fetchFavorites = createAppAsyncThunk<Offer[], undefined>(
   'fetchFavorites',
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<Offer[]>(APIRoute.Favorites);
+    return data;
+  },
+);
+
+export const postFavorite = createAppAsyncThunk<Offer, FavoritesData>(
+  'postFavorite',
   async ({id, isFavorite}, {extra: api}) => {
     const number = Number(isFavorite);
     const {data} = await api.post<FullOffer>(`${APIRoute.Favorites}/${id}/${number}`, {number});

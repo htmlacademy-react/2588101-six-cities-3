@@ -1,25 +1,44 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {NameSpace} from '../../const';
+import {NameSpace, RequestStatus} from '../../const';
 import {AppData} from '../../types/state';
-import {fetchAllOffers} from '../api-actions';
+import {fetchAllOffers, postFavorite, logout} from '../api-actions';
 
 const initialState: AppData = {
   offers: [],
-  isOffersDataLoading: false,
+  status: RequestStatus.Idle
 };
 
-export const appData = createSlice({
+const appData = createSlice({
   name: NameSpace.Data,
   initialState,
   reducers: {},
   extraReducers(builder) {
     builder
       .addCase(fetchAllOffers.pending, (state) => {
-        state.isOffersDataLoading = true;
+        state.status = RequestStatus.Loading;
       })
       .addCase(fetchAllOffers.fulfilled, (state, action) => {
         state.offers = action.payload;
-        state.isOffersDataLoading = false;
-      });
+        state.status = RequestStatus.Success;
+      })
+      .addCase(fetchAllOffers.rejected, (state) => {
+        state.status = RequestStatus.Failed;
+      })
+      .addCase(postFavorite.fulfilled, (state, action) => {
+        const changedOffer = action.payload;
+
+        for (const offer of state.offers) {
+          if (offer.id === changedOffer.id) {
+            offer.isFavorite = changedOffer.isFavorite;
+
+            return;
+          }
+        }
+      })
+      .addCase(logout.fulfilled, () => initialState);
   }
 });
+
+const allOffersActions = {...appData.actions, fetchAllOffers};
+
+export {allOffersActions, appData};

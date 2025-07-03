@@ -1,34 +1,43 @@
-import PlaceCardBookmark from '../../components/place-card-bookmark/place-card-bookmark';
+import Bookmark from '../../components/bookmark/bookmark';
 import PlaceCardMark from '../../components/place-card-mark/place-card-mark';
 import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer';
 import {capitalizeFirst} from '../../utils';
+import {PlaceCardClass} from '../../const';
 
 const STARS_STYLE_COEFF = 20;
 
 type PlaceCardProps = {
   offer: Offer;
   onHandleChangeActiveId?: (id?: string) => void;
-  isNearPlace: boolean;
+  placeCardClass: PlaceCardClass;
 };
 
 function PlaceCard({
   offer,
   onHandleChangeActiveId,
-  isNearPlace
+  placeCardClass
 }: PlaceCardProps): JSX.Element {
+
+  const isFavorite = placeCardClass === PlaceCardClass.Favorites;
 
   const {isPremium, previewImage, id, price, rating, title, type} = offer;
 
   return (
-    <article className={`${isNearPlace ? 'near-places' : 'cities'}__card place-card`}
+    <article className={`${placeCardClass}__card place-card`}
       onMouseEnter={() => onHandleChangeActiveId && onHandleChangeActiveId(offer.id)}
       onMouseLeave={() => onHandleChangeActiveId && onHandleChangeActiveId()}
     >
       {isPremium && <PlaceCardMark />}
-      <div className={`${isNearPlace ? 'near-places' : 'cities'}__image-wrapper place-card__image-wrapper`}>
+      <div className={`${placeCardClass}__image-wrapper place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
-          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
+          <img
+            className="place-card__image"
+            src={previewImage}
+            width={isFavorite ? '150' : '260'}
+            height={isFavorite ? '110' : '200'}
+            alt="Place image"
+          />
         </Link>
       </div>
       <div className="place-card__info">
@@ -37,7 +46,10 @@ function PlaceCard({
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <PlaceCardBookmark isFavorite/>
+          <Bookmark
+            isFavorite={isFavorite}
+            offerId={id}
+          />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

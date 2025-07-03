@@ -1,5 +1,6 @@
 import PlaceCard from '../../components/place-card/place-card';
 import {Offers} from '../../types/offer';
+import {PlaceCardClass} from '../../const';
 
 type OfferListProps = {
 offers: Offers;
@@ -19,7 +20,7 @@ function OfferList({
             onHandleChangeActiveId={onHandleChangeActiveId}
             offer={offer}
             key={keyValue}
-            isNearPlace={false}
+            placeCardClass={PlaceCardClass.Cities}
           />
         );
       })}

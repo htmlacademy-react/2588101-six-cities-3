@@ -16,7 +16,7 @@ activeCity: City;
 
 export type AppData = {
   offers: Offer[];
-  isOffersDataLoading: boolean;
+  status: RequestStatus;
 };
 
 export type ReviewsData = {
@@ -29,6 +29,11 @@ export type FullOfferData = {
   nearby: Offer[];
   status: RequestStatus;
   activeOfferId?: Offer['id'] | null;
+};
+
+export type FavoriteData = {
+  items: Offer[];
+  status: RequestStatus;
 };
 
 export type State = ReturnType<typeof store.getState>;
