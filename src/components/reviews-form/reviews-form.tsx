@@ -68,7 +68,9 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
     });
   };
 
-  const submitFlags = [!userReview.rating, userReview.review.length < MIN_COMMENT_LENGTH, userReview.isformDisabled, userReview.review.length > MAX_COMMENT_LENGTH];
+  const {rating, review, isformDisabled} = userReview;
+
+  const submitFlags = [!rating, review.length < MIN_COMMENT_LENGTH, isformDisabled, review.length > MAX_COMMENT_LENGTH];
   const isSubmitDisabled = submitFlags.some((element) => element === true);
 
   return (
@@ -81,9 +83,14 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
       <div className="reviews__rating-form form__rating">
         {ratingList.map(({value, label}) => (
           <Fragment key={value}>
-            <input className="form__rating-input visually-hidden" name="rating" value={value} id={`${value}-stars`} type="radio"
+            <input
+              className="form__rating-input visually-hidden"
+              name="rating"
+              value={value}
+              id={`${value}-stars`}
+              type="radio"
               onChange={handleChange}
-              disabled={userReview.isformDisabled}
+              disabled={isformDisabled}
             />
             <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title={label}>
               <svg className="form__star-image" width="37" height="33">
@@ -97,10 +104,9 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
         className="reviews__textarea form__textarea"
         id="review"
         name="review"
-        maxLength={MAX_COMMENT_LENGTH}
         minLength={MIN_COMMENT_LENGTH}
         required
-        disabled={userReview.isformDisabled}
+        disabled={isformDisabled}
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleChange}
       >
