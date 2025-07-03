@@ -5,24 +5,24 @@ import PlaceCard from '../../components/place-card/place-card';
 import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer';
 import {useAppSelector} from '../../hooks/types';
-import {getOffers} from '../../store/app-data/app-data.selectors';
+import {getFavorites} from '../../store/favorites-data/favorites-data.selectors';
 import {PlaceCardClass} from '../../const';
 
 function FavoritesPage(): JSX.Element {
-  const offers = useAppSelector(getOffers);
-  const filteredOffers = offers.filter((offer) => offer.isFavorite === true);
+  const favoriteOffers = useAppSelector(getFavorites);
 
   const uniqCities: string[] = [];
-  filteredOffers.forEach((element: Offer) => {
+
+  favoriteOffers.forEach((element: Offer) => {
     if (element.city.name !== uniqCities[uniqCities.length - 1]) {
       uniqCities.push(element.city.name);
     }
   });
 
   return (
-    <div className={`page ${filteredOffers.length === 0 && 'page--favorites-empty'}`}>
+    <div className={`page ${favoriteOffers.length === 0 && 'page--favorites-empty'}`}>
       <Header />
-      {filteredOffers.length === 0 ?
+      {favoriteOffers.length === 0 ?
         <FavoritesEmpty />
         :
         <main className="page__main page__main--favorites">
@@ -44,7 +44,7 @@ function FavoritesPage(): JSX.Element {
                       </div>
 
                       <div className="favorites__places">
-                        {filteredOffers.filter((offer) => offer.city.name === city).map((offer, offerId) => {
+                        {favoriteOffers.filter((offer) => offer.city.name === city).map((offer, offerId) => {
                           const keyOffer = `${offerId}-${offer.id}`;
 
                           return (
