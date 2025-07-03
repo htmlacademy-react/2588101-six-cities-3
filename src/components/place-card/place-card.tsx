@@ -1,4 +1,4 @@
-import PlaceCardBookmark from '../../components/place-card-bookmark/place-card-bookmark';
+import Bookmark from '../../components/bookmark/bookmark';
 import PlaceCardMark from '../../components/place-card-mark/place-card-mark';
 import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer';
@@ -46,7 +46,10 @@ function PlaceCard({
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <PlaceCardBookmark isFavorite/>
+          <Bookmark
+            isFavorite={isFavorite}
+            offerId={id}
+          />
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

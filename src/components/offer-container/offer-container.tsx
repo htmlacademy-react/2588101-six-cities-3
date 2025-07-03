@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import {FullOffer} from '../../types/offer';
 import {capitalizeFirst} from '../../utils';
+import Bookmark from '../../components/bookmark/bookmark';
 
 const STARS_STYLE_COEFF = 20;
 
@@ -9,7 +10,7 @@ type OfferContainerProps = {
 }
 
 function OfferContainer({ offer}: OfferContainerProps): JSX.Element {
-  const {bedrooms, description, goods, host, isPremium, maxAdults, price, rating, title, type} = offer;
+  const {bedrooms, description, goods, host, isPremium, maxAdults, price, rating, title, type, isFavorite, id} = offer;
   const {name, avatarUrl, isPro} = host;
 
   return (
@@ -24,12 +25,11 @@ function OfferContainer({ offer}: OfferContainerProps): JSX.Element {
         <h1 className="offer__name">
           {title}
         </h1>
-        <button className="offer__bookmark-button button" type="button">
-          <svg className="offer__bookmark-icon" width="31" height="33">
-            <use xlinkHref="#icon-bookmark"></use>
-          </svg>
-          <span className="visually-hidden">To bookmarks</span>
-        </button>
+        <Bookmark
+          isFavorite={isFavorite}
+          offerId={id}
+          place='offer'
+        />
       </div>
       <div className="offer__rating rating">
         <div className="offer__stars rating__stars">
