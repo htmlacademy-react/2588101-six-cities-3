@@ -89,7 +89,7 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
               value={value}
               id={`${value}-stars`}
               type="radio"
-              onChange={handleChange}
+              onInput={handleChange}
               disabled={isformDisabled}
             />
             <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title={label}>
