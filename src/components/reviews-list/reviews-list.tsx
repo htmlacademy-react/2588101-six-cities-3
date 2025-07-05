@@ -3,19 +3,20 @@ import ReviewsForm from '../../components/reviews-form/reviews-form';
 import {useAppSelector} from '../../hooks/types';
 import {AuthorizationStatus} from '../../const';
 import {getAuthorizationStatus} from '../../store/user-process/user-process.selectors';
-import {getReviews} from '../../store/reviews-data/reviews-data.selectors';
 import {getFullOffer} from '../../store/full-offer-data/full-offer-data.selectors';
+import {Review} from '../../types/review';
 
-function ReviewsList(): JSX.Element {
-  const reviews = useAppSelector(getReviews);
+type ReviewsListProps = {
+  reviews: Review[];
+}
+
+function ReviewsList({reviews}: ReviewsListProps): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const fullOffer = useAppSelector(getFullOffer);
 
-  const slicedReviews = reviews.slice(0, 10);
-
   return (
     <ul className="reviews__list">
-      {slicedReviews.map((review, id) => {
+      {reviews.map((review, id) => {
         const keyValue = `${id}-${review.id}`;
         return (
           <ReviewsItem
