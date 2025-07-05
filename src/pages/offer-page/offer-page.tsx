@@ -7,7 +7,6 @@ import OfferContainer from '../../components/offer-container/offer-container';
 import {useAppSelector, useActionCreators} from '../../hooks/types';
 import {useParams} from 'react-router-dom';
 import {useEffect} from 'react';
-import {getAllOffers} from '../../store/app-data/app-data.selectors';
 import {getReviews} from '../../store/reviews-data/reviews-data.selectors';
 import {getFullOffer, getNearbyOffers, getOfferStatus} from '../../store/full-offer-data/full-offer-data.selectors';
 import {fullOfferActions} from '../../store/full-offer-data/full-offer-data';
@@ -18,26 +17,33 @@ import LoadingPage from '../loading-page/loading-page';
 import NotFoundPage from '../not-found-page/not-found-page';
 
 const MAX_REVIEWS = 10;
+const MAX_COUNT_NEARBY_OFFERS = 3;
 
 function OfferPage(): JSX.Element {
-  const offers = useAppSelector(getAllOffers);
   const fullOffer = useAppSelector(getFullOffer);
   const status = useAppSelector(getOfferStatus);
   const nearbyOffers = useAppSelector(getNearbyOffers);
   const reviews = useAppSelector(getReviews);
 
   const sortedReviews = reviews.toSorted(sortReviewsByDate).slice(0, MAX_REVIEWS);
+  const slicedNearbyOffers = nearbyOffers && nearbyOffers.slice(0, MAX_COUNT_NEARBY_OFFERS);
+  const sortedOffers = [fullOffer, ...slicedNearbyOffers];
 
-  const {fetchFullOffer, fetchNearbyOffers} = useActionCreators(fullOfferActions);
+  const {fetchFullOffer, fetchNearbyOffers, clearFullOffer, setActiveOfferId} = useActionCreators(fullOfferActions);
   const {fetchReviews} = useActionCreators(reviewsActions);
 
   const {id} = useParams() as {id: string};
 
   useEffect(() => {
     if (status === RequestStatus.Idle) {
+      setActiveOfferId(id);
       Promise.all([fetchFullOffer(id), fetchNearbyOffers(id), fetchReviews(id)]);
     }
-  }, [fetchFullOffer, fetchNearbyOffers, fetchReviews, id, status]);
+  }, [fetchFullOffer, fetchNearbyOffers, fetchReviews, id, status, setActiveOfferId]);
+
+  useEffect(() => {
+    clearFullOffer();
+  }, [id, clearFullOffer]);
 
   if (status === RequestStatus.Loading) {
     return <LoadingPage />;
@@ -67,20 +73,20 @@ function OfferPage(): JSX.Element {
           </div>
           <CitiesMap
             city={fullOffer.city}
-            offers={offers}
+            offers={sortedOffers}
             activeOfferId={fullOffer.id}
             place="offer"
           />
         </section>
-        {offers && offers.length > 0 &&
-          <div className="container">
-            <section className="near-places places">
-              <h2 className="near-places__title">Other places in the neighbourhood</h2>
-              <div className="near-places__list places__list">
-                <NearPlacesList offers={nearbyOffers} />
-              </div>
-            </section>
-          </div>}
+
+        <div className="container">
+          <section className="near-places places">
+            <h2 className="near-places__title">Other places in the neighbourhood</h2>
+            <div className="near-places__list places__list">
+              <NearPlacesList offers={slicedNearbyOffers} />
+            </div>
+          </section>
+        </div>
       </main>
     </div>
   );
