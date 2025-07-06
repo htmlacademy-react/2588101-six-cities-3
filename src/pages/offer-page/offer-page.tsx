@@ -15,6 +15,7 @@ import {RequestStatus} from '../../const';
 import {sortReviewsByDate} from '../../utils';
 import LoadingPage from '../loading-page/loading-page';
 import NotFoundPage from '../not-found-page/not-found-page';
+import {Offer} from '../../types/offer';
 
 const MAX_REVIEWS = 10;
 const MAX_COUNT_NEARBY_OFFERS = 3;
@@ -26,8 +27,12 @@ function OfferPage(): JSX.Element {
   const reviews = useAppSelector(getReviews);
 
   const sortedReviews = reviews.toSorted(sortReviewsByDate).slice(0, MAX_REVIEWS);
-  const slicedNearbyOffers = nearbyOffers && nearbyOffers.slice(0, MAX_COUNT_NEARBY_OFFERS);
-  const sortedOffers = [fullOffer, ...slicedNearbyOffers];
+  const slicedNearbyOffers = Array.isArray(nearbyOffers)
+    ? nearbyOffers.slice(0, MAX_COUNT_NEARBY_OFFERS)
+    : [];
+  const sortedOffers = [fullOffer, ...slicedNearbyOffers].filter(
+    (offer): offer is Offer => Boolean(offer)
+  );
 
   const {fetchFullOffer, fetchNearbyOffers, clearFullOffer, setActiveOfferId} = useActionCreators(fullOfferActions);
   const {fetchReviews} = useActionCreators(reviewsActions);
