@@ -50,7 +50,7 @@ function MainPage(): JSX.Element {
         <Header />
       </header>
 
-      <main className={`page__main page__main--index ${offers.length === 0 && 'page__main--index-empty'}`}>
+      <main className={`page__main page__main--index ${activeCityOffers.length === 0 ? 'page__main--index-empty' : ''}`}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
@@ -58,29 +58,31 @@ function MainPage(): JSX.Element {
           </section>
         </div>
         <div className="cities">
-          {offers.length === 0 ?
-            <MainEmpty activeCityName={activeCity.name} />
-            :
-            <div className="cities__places-container container">
-              <section className="cities__places places">
-                <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{activeCityOffers.length} place{(activeCityOffers.length > 1 || activeCityOffers.length === 0) && 's'} to stay in {activeCity.name}</b>
-                {activeCityOffers.length > 0 && <PlacesSorting current={activeSort} setter={setActiveSort} />}
-                <div className="cities__places-list places__list tabs__content">
-                  <OffersList
-                    onHandleChangeActiveId={handleChangeActiveId}
-                    offers={sortedOffers}
-                  />
-                </div>
-              </section>
-              <div className="cities__right-section">
-                <CitiesMap
-                  city={activeCity}
-                  offers={activeCityOffers}
-                  activeOfferId={activeOfferId}
-                />
-              </div>
-            </div>}
+          <div className={`cities__places-container ${(activeCityOffers.length === 0) ? 'cities__places-container--empty' : ''} container`}>
+            {(activeCityOffers.length === 0) && <MainEmpty activeCityName={activeCity.name} />}
+            {(activeCityOffers.length > 0) &&
+               <>
+                 <section className="cities__places places">
+                   <h2 className="visually-hidden">Places</h2>
+                   <b className="places__found">{activeCityOffers.length} place{(activeCityOffers.length > 1 || activeCityOffers.length === 0) && 's'} to stay in {activeCity.name}</b>
+                   {activeCityOffers.length > 0 && <PlacesSorting current={activeSort} setter={setActiveSort} />}
+                   <div className="cities__places-list places__list tabs__content">
+                     <OffersList
+                       onHandleChangeActiveId={handleChangeActiveId}
+                       offers={sortedOffers}
+                     />
+                   </div>
+                 </section>
+                 <div className="cities__right-section">
+                   {activeCityOffers.length === 0 ? '' :
+                     <CitiesMap
+                       city={activeCity}
+                       offers={activeCityOffers}
+                       activeOfferId={activeOfferId}
+                     />}
+                 </div>
+               </>}
+          </div>
         </div>
       </main>
     </div>

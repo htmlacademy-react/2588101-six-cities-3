@@ -1,4 +1,4 @@
-import {useState, Fragment, FormEvent} from 'react';
+import {useState, Fragment, FormEvent, ChangeEvent} from 'react';
 import {FullOffer} from '../../types/offer';
 import {reviewsActions} from '../../store/reviews-data/reviews-data';
 import {useActionCreators} from '../../hooks/types';
@@ -33,7 +33,12 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
     isformDisabled: false
   });
 
-  const handleChange = (evt: {target: {name: string; value: string}}) => {
+  const handleRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = evt.target;
+    setUserReview({...userReview, [name]: value});
+  };
+
+  const handleTextChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     const {name, value} = evt.target;
     setUserReview({...userReview, [name]: value});
   };
@@ -89,7 +94,7 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
               value={value}
               id={`${value}-stars`}
               type="radio"
-              onChange={handleChange}
+              onInput={handleRatingChange}
               disabled={isformDisabled}
             />
             <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title={label}>
@@ -108,7 +113,7 @@ function ReviewsForm({offerId}: ReviewsFormProps): JSX.Element {
         required
         disabled={isformDisabled}
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={handleChange}
+        onChange={handleTextChange}
       >
 
       </textarea>
