@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer';
 import {capitalizeFirst} from '../../utils';
 import {PlaceCardClass} from '../../const';
+import {useLocation} from 'react-router-dom';
 
 const STARS_STYLE_COEFF = 20;
 
@@ -19,7 +20,9 @@ function PlaceCard({
   placeCardClass
 }: PlaceCardProps): JSX.Element {
 
-  const isFavorite = placeCardClass === PlaceCardClass.Favorites;
+  const location = useLocation();
+  const isFavorite = offer.isFavorite;
+  const isFavoritePage = !!location.pathname.includes('/favorites');
 
   const {isPremium, previewImage, id, price, rating, title, type} = offer;
 
@@ -34,8 +37,8 @@ function PlaceCard({
           <img
             className="place-card__image"
             src={previewImage}
-            width={isFavorite ? '150' : '260'}
-            height={isFavorite ? '110' : '200'}
+            width={isFavorite && isFavoritePage ? '150' : '260'}
+            height={isFavorite && isFavoritePage ? '110' : '200'}
             alt="Place image"
           />
         </Link>
