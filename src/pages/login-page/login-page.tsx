@@ -1,8 +1,8 @@
 import Logo from '../../components/logo/logo';
-import {Link} from 'react-router-dom';
 import {useRef, FormEvent} from 'react';
 import {useAppDispatch} from '../../hooks/types';
 import {login} from '../../store/api-actions';
+import RandomCity from '../../components/random-city/random-city';
 
 function LoginPage(): JSX.Element {
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -75,13 +75,7 @@ function LoginPage(): JSX.Element {
               </button>
             </form>
           </section>
-          <section className="locations locations--login locations--current">
-            <div className="locations__item">
-              <Link className="locations__item-link" to="#">
-                <span>Amsterdam</span>
-              </Link>
-            </div>
-          </section>
+          <RandomCity />
         </div>
       </main>
     </div>
